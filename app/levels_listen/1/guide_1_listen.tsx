@@ -9,7 +9,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
-  const bgImage = require('@/assets/images/guia1.jpeg');
+  const bgImage = require('@/assets/images/guia1.png');
 
   const [mode, setMode] = useState<'read' | 'listen' | null>(null);
   const [playbackSpeed, setPlaybackSpeed] = useState<'normal' | 'slow'>('normal');
@@ -69,8 +69,8 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       name: 'obj_ale',
       style: {
         position: 'absolute' as 'absolute',
-        left: wp('13%'),
-        top: hp('33%'),
+        left: wp('14%'),
+        top: hp('28%'),
         width: wp('5%'),
         height: hp('6%'),
         borderWidth: 3,
@@ -86,8 +86,8 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       name: 'obj_nolo_nkuo',
       style: {
         position: 'absolute' as 'absolute',
-        left: wp('8%'),
-        top: hp('84%'),
+        left: wp('7%'),
+        top: hp('88%'),
         width: wp('5%'),
         height: hp('6%'),
         borderWidth: 3,
@@ -103,8 +103,8 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       name: 'obj_kapo',
       style: {
         position: 'absolute' as 'absolute',
-        left: wp('47%'),
-        top: hp('74%'),
+        left: wp('49%'),
+        top: hp('78%'),
         width: wp('5%'),
         height: hp('6%'),
         borderWidth: 3,
@@ -120,8 +120,8 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       name: 'obj_nolo_kibi',
       style: {
         position: 'absolute' as 'absolute',
-        left: wp('33%'),
-        top: hp('84%'),
+        left: wp('35%'),
+        top: hp('88%'),
         width: wp('5%'),
         height: hp('6%'),
         borderWidth: 3,
