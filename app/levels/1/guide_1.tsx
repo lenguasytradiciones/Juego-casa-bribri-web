@@ -17,7 +17,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const Guide1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
-  const bgImage = require('@/assets/images/guia1.jpeg');
+  const bgImage = require('@/assets/images/guia1.png');
   const [mode, setMode] = useState<'read' | 'listen' | null>(null);
   
   // Tutorial states
