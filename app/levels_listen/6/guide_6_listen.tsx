@@ -84,7 +84,7 @@ const Guide6Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_kapokwa', 
             style: {
                 position: 'absolute',
-                left: hp('144%'),
+                left: wp('68.5%'),
                 top: hp('34%'),
                 width: wp('5%'),
                 height: hp('6%'),
