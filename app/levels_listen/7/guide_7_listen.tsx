@@ -82,7 +82,7 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_ajko_ko', 
             style: {
                 position: 'absolute',
-                left: wp('9%'),
+                left: wp('12%'),
                 top: hp('91%'),
                 width: wp('5%'),
                 height: hp('5%'),
@@ -99,7 +99,7 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_sabak_dule', 
             style: {
                 position: 'absolute',
-                left: wp('33%'),
+                left: wp('35%'),
                 top: hp('91%'),
                 width: wp('5%'),
                 height: hp('5%'),
@@ -116,7 +116,7 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_kula', 
             style: {
                 position: 'absolute',
-                left: wp('64%'),
+                left: wp('62%'),
                 top: hp('91%'),
                 width: wp('5%'),
                 height: hp('5%'),
@@ -150,8 +150,8 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_sku', 
             style: {
                 position: 'absolute',
-                left: wp('52%'),
-                top: hp('32%'),
+                left: wp('51.5%'),
+                top: hp('31%'),
                 width: wp('5%'),
                 height: hp('5%'),
                 borderWidth: 3,
@@ -167,7 +167,7 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_tska_tka', 
             style: {
                 position: 'absolute',
-                left: wp('21%'),
+                left: wp('22%'),
                 top: hp('91%'),
                 width: wp('5%'),
                 height: hp('5%'),
@@ -201,8 +201,8 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_skou', 
             style: {
                 position: 'absolute',
-                left: wp('67%'),
-                top: hp('72%'),
+                left: wp('67.5%'),
+                top: hp('71.5%'),
                 width: wp('5%'),
                 height: hp('5%'),
                 borderWidth: 3,
@@ -218,8 +218,8 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_tcho_tka', 
             style: {
                 position: 'absolute', 
-                left: wp('62%'),
-                top: hp('32%'),
+                left: wp('67%'),
+                top: hp('27%'),
                 width: wp('5%'),
                 height: hp('5%'),
                 borderWidth: 3,
@@ -235,8 +235,8 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_u', 
             style: {
                 position: 'absolute',
-                left: wp('28%'),
-                top: hp('16%'),
+                left: wp('30%'),
+                top: hp('16.5%'),
                 width: wp('5%'),
                 height: hp('5%'),
                 borderWidth: 3,

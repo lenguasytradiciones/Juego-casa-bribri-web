@@ -67,8 +67,8 @@ const Guide6Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_iwo', 
             style: {
                 position: 'absolute',
-                left: wp('17%'),
-                top: hp('71%'), // y + 10
+                left: wp('19%'),
+                top: hp('71.5%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
@@ -84,13 +84,13 @@ const Guide6Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_kapokwa', 
             style: {
                 position: 'absolute',
-                left: hp('125%'),
-                top: hp('40%'), // y + 10
+                left: hp('144%'),
+                top: hp('34%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
-                borderColor: '#ede430',
-                backgroundColor: 'rgba(237, 228, 48, 0.3)',
+                borderColor: '#603f91',
+                backgroundColor: 'rgba(96, 63, 145, 0.3)',
                 justifyContent: 'center',
                 alignItems: 'center',
             },
@@ -101,8 +101,8 @@ const Guide6Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_ak_wawe', 
             style: {
                 position: 'absolute',
-                left: wp('12.3%'),
-                top: hp('35%'), // y + 10
+                left: wp('14.5%'),
+                top: hp('35%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
@@ -118,13 +118,13 @@ const Guide6Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_u_shu', 
             style: {
                 position: 'absolute',
-                left: wp('33%'),
-                top: hp('53%'), // y + 10
+                left: wp('33.5%'),
+                top: hp('53%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
-                borderColor: '#603f91',
-                backgroundColor: 'rgba(96, 63, 145, 0.3)',
+                borderColor: '#ede430',
+                backgroundColor: 'rgba(237, 228, 48, 0.3)',
                 justifyContent: 'center',
                 alignItems: 'center',
             },
@@ -136,7 +136,7 @@ const Guide6Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             style: {
                 position: 'absolute',
                 left: wp('37%'),
-                top: hp('28%'), // y + 10
+                top: hp('17%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
@@ -152,8 +152,8 @@ const Guide6Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_ko', 
             style: {
                 position: 'absolute',
-                left: wp('67%'),
-                top: hp('14%'), // y + 10
+                left: wp('63.5%'),
+                top: hp('15%'), 
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
@@ -170,7 +170,7 @@ const Guide6Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             style: {
                 position: 'absolute',
                 left: wp('56.5%'),
-                top: hp('1%'), // y + 10
+                top: hp('2%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,

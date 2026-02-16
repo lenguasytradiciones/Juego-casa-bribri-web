@@ -52,7 +52,7 @@ const Guide4Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_kochane', 
             style: {
                 position: 'absolute',
-                left: wp('9.5%'),
+                left: wp('12%'),
                 top: hp('62%'),
                 width: wp('5%'),
                 height: hp('6%'),
@@ -69,7 +69,7 @@ const Guide4Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_kokata', 
             style: {
                 position: 'absolute',
-                left: wp('46%'),
+                left: wp('45.5%'),
                 top: hp('51%'),
                 width: wp('5%'),
                 height: hp('6%'),
@@ -86,8 +86,8 @@ const Guide4Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_kowolo', 
             style: {
                 position: 'absolute',
-                left: wp('46%'),
-                top: hp('38%'),
+                left: wp('45.5%'),
+                top: hp('37%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
