@@ -52,8 +52,8 @@ const Guide5Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_chane', 
             style: {
                 position: 'absolute',
-                left: wp('76%'),
-                top: hp('12%'),
+                left: wp('73%'),
+                top: hp('13%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,

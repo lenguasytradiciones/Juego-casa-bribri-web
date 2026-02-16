@@ -61,8 +61,8 @@ const Guide3Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_u_tto', 
             style: {
                 position: 'absolute',
-                left: wp('4%'),
-                top: hp('71%'),
+                left: wp('2.5%'),
+                top: hp('65%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
@@ -78,8 +78,8 @@ const Guide3Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_uko', 
             style: {
                 position: 'absolute',
-                left: wp('72%'),
-                top: hp('50.5%'),
+                left: wp('68.5%'),
+                top: hp('45.5%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
@@ -112,7 +112,7 @@ const Guide3Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_u_tsi', 
             style: {
                 position: 'absolute',
-                left: wp('48.5%'),
+                left: wp('48%'),
                 top: hp('78%'),
                 width: wp('5%'),
                 height: hp('6%'),
@@ -146,8 +146,8 @@ const Guide3Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_etsok', 
             style: {
                 position: 'absolute',
-                left: wp('30%'),
-                top: hp('29%'),
+                left: wp('33%'),
+                top: hp('16%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
