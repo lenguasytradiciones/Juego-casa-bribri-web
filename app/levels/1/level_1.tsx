@@ -120,7 +120,6 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const [selectedObject, setSelectedObject] = useState<string | null>(null);
     const [matches, setMatches] = useState<Record<string, string>>({});
     const [canContinue, setCanContinue] = useState(false);
-    const [attemptHistory, setAttemptHistory] = useState<Record<string, boolean>>({}); // Track incorrect attempts
 
     const LEVEL_ID = 1;
     const LEVEL_MODE = LevelMode.READ;
