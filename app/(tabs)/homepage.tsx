@@ -17,13 +17,11 @@ import {
 } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { hasWordsForPractice } from '../misc/wordPracticeTracker'; // Import practice checker
 
 const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [tutorialStep, setTutorialStep] = useState(0);
   const [toucanEnabled, setToucanEnabled] = useState<boolean | null>(null);
   const [showPDFModal, setShowPDFModal] = useState(false);
-  const [practiceAvailable, setPracticeAvailable] = useState(false);
   const [showIntonationModal, setShowIntonationModal] = useState(false);
 
   const toucanPosition = useRef(new Animated.ValueXY({ x: wp('70%'), y: hp('15%') })).current;
@@ -36,18 +34,6 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
     setShowIntonationModal(true);
   };
 
-  // Check for practice words availability
-  const checkPracticeAvailability = async () => {
-    try {
-      const hasWords = await hasWordsForPractice();
-      setPracticeAvailable(hasWords);
-      console.log('Practice words available:', hasWords);
-    } catch (error) {
-      console.error('Error checking practice availability:', error);
-      setPracticeAvailable(false);
-    }
-  };
-
   // Use useFocusEffect to check settings every time the screen comes into focus
   useFocusEffect(
     useCallback(() => {
@@ -58,9 +44,6 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           const wasEnabled = toucanEnabled;
 
           setToucanEnabled(enabled);
-
-          // Check practice availability
-          await checkPracticeAvailability();
 
           console.log('Toucan enabled:', enabled);
           console.log('Was enabled:', wasEnabled);
@@ -161,72 +144,7 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           ),
         ]).start();
         break;
-      case 3: // Point to practice button (if available)
-        if (practiceAvailable) {
-          Animated.parallel([
-            Animated.timing(toucanPosition, {
-              toValue: { x: wp('65%'), y: hp('30%') },
-              duration: 1000,
-              useNativeDriver: true,
-            }),
-            Animated.timing(bubbleOpacity, {
-              toValue: 1,
-              duration: 500,
-              useNativeDriver: true,
-              delay: 800,
-            }),
-            Animated.loop(
-              Animated.sequence([
-                Animated.timing(buttonHighlight, {
-                  toValue: 1,
-                  duration: 800,
-                  useNativeDriver: false,
-                }),
-                Animated.timing(buttonHighlight, {
-                  toValue: 0.2,
-                  duration: 800,
-                  useNativeDriver: false,
-                }),
-              ]),
-              { iterations: 3 }
-            ),
-          ]).start();
-        } else {
-          // Skip to next step if practice not available
-          // Don't call advanceTutorial() recursively, just update the step
-          setTutorialStep(4);
-          // Manually trigger the animation for step 4
-          Animated.parallel([
-            Animated.timing(toucanPosition, {
-              toValue: { x: wp('15%'), y: hp('15%') },
-              duration: 1000,
-              useNativeDriver: true,
-            }),
-            Animated.timing(bubbleOpacity, {
-              toValue: 1,
-              duration: 500,
-              useNativeDriver: true,
-              delay: 800,
-            }),
-            Animated.loop(
-              Animated.sequence([
-                Animated.timing(buttonHighlight, {
-                  toValue: 1,
-                  duration: 800,
-                  useNativeDriver: false,
-                }),
-                Animated.timing(buttonHighlight, {
-                  toValue: 0.2,
-                  duration: 800,
-                  useNativeDriver: false,
-                }),
-              ]),
-              { iterations: 3 }
-            ),
-          ]).start();
-        }
-        break;
-      case 4: // Point to settings button
+      case 3: // Point to settings button
         Animated.parallel([
           Animated.timing(toucanPosition, {
             toValue: { x: wp('60%'), y: hp('65%') },
@@ -256,7 +174,7 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           ),
         ]).start();
         break;
-      case 5: // Point to instructions/credits/manual
+      case 4: // Point to instructions/credits/manual
         Animated.parallel([
           Animated.timing(toucanPosition, {
             toValue: { x: wp('50%'), y: hp('70%') },
@@ -271,7 +189,7 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           }),
         ]).start();
         break;
-      case 6: // Final position and message
+      case 5: // Final position and message
         Animated.parallel([
           Animated.timing(toucanPosition, {
             toValue: { x: wp('70%'), y: hp('15%') },
@@ -299,22 +217,15 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
     navigation.navigate('LevelMapping');
   };
 
-  const handlePractice = () => {
-    if (tutorialStep === 3) {
-      advanceTutorial();
-    }
-    navigation.navigate('WordsPractice');
-  };
-
   const handleSettings = () => {
-    if (tutorialStep === 4) {
+    if (tutorialStep === 3) {
       advanceTutorial();
     }
     navigation.navigate('ToucanSettings');
   };
 
   const handleInstrucciones = () => {
-    if (tutorialStep === 5) {
+    if (tutorialStep === 4) {
       advanceTutorial();
     }
     // Show instructions alert or navigate to instructions screen
@@ -348,7 +259,7 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
   }
 
   const handleManualPreview = () => {
-    if (tutorialStep === 5) {
+    if (tutorialStep === 4) {
       advanceTutorial();
     }
     setShowPDFModal(true);
@@ -358,7 +269,7 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
     if (tutorialStep === 0) {
       // Start the tutorial from the beginning
       startTutorial();
-    } else if (tutorialStep > 6) {
+    } else if (tutorialStep > 5) {
       // Reset tutorial after completion
       setTutorialStep(0);
       toucanScale.setValue(0);
@@ -378,14 +289,10 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
       case 2:
         return 'Presiona el botón "Jugar" para comenzar a aprender BriBri con diversos niveles interactivos.';
       case 3:
-        return practiceAvailable
-          ? 'Este botón te permite practicar palabras que has tenido dificultades para recordar. ¡Es muy útil!'
-          : '';
-      case 4:
         return 'Si quieres activar o desactivar mi ayuda, puedes tocar mi imagen aquí abajo a la derecha.';
-      case 5:
+      case 4:
         return 'Aquí abajo encontrarás las instrucciones del juego, los créditos y el manual original de BriBri.';
-      case 6:
+      case 5:
         return '¡Estaré aquí para ayudarte durante tu aprendizaje! Tócame si necesitas ayuda. ¡Vamos a aprender BriBri juntos!';
       default:
         return '';
@@ -491,29 +398,6 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
               resizeMode="stretch"
             />
           </TouchableOpacity>
-
-          {/* Practice Words Button - Only show if words are available */}
-          {practiceAvailable && (
-            <>
-              {/* Practice button highlight during tutorial */}
-              {tutorialStep === 3 && (
-                <Animated.View
-                  style={[
-                    styles.practiceButtonHighlight,
-                    { backgroundColor: practiceButtonHighlight }
-                  ]}
-                />
-              )}
-
-              <TouchableOpacity onPress={handlePractice} style={styles.practiceButtonContainer}>
-                <View style={styles.practiceButtonBackground}>
-                  <Text style={styles.practiceButtonText}>Practicar</Text>
-                  <Text style={styles.practiceButtonSubtext}>Palabras</Text>
-                  <Text style={styles.practiceButtonIcon}>🔄</Text>
-                </View>
-              </TouchableOpacity>
-            </>
-          )}
         </View>
 
         {/* Intonation Guide Modal */}
@@ -912,50 +796,6 @@ const styles = StyleSheet.create({
     width: wp('27%'),
     height: hp('37%'),
   },
-  practiceButtonContainer: {
-    marginLeft: wp('3%'),
-    zIndex: 6,
-  },
-  practiceButtonBackground: {
-    backgroundColor: '#FF6B35',
-    borderRadius: 15,
-    paddingVertical: hp('3%'),
-    paddingHorizontal: wp('3%'),
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: wp('18%'),
-    height: hp('25%'),
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 8,
-    borderWidth: 3,
-    borderColor: '#D35400',
-  },
-  practiceButtonText: {
-    color: 'white',
-    fontSize: hp('2.2%'),
-    fontWeight: 'bold',
-    textAlign: 'center',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 3,
-  },
-  practiceButtonSubtext: {
-    color: 'white',
-    fontSize: hp('1.8%'),
-    fontWeight: '600',
-    textAlign: 'center',
-    marginTop: hp('0.5%'),
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 3,
-  },
-  practiceButtonIcon: {
-    fontSize: hp('3%'),
-    marginTop: hp('1%'),
-  },
   // Settings Button Styles
   settingsButton: {
     position: 'absolute',
@@ -1061,15 +901,6 @@ const styles = StyleSheet.create({
     left: 0,
     width: wp('27%'),
     height: hp('37%'),
-    borderRadius: 15,
-    zIndex: 4,
-  },
-  practiceButtonHighlight: {
-    position: 'absolute',
-    top: 0,
-    left: wp('30%'),
-    width: wp('18%'),
-    height: hp('25%'),
     borderRadius: 15,
     zIndex: 4,
   },
