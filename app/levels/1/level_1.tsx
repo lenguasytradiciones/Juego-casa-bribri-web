@@ -346,7 +346,7 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
         if (selectedObject) {
             const objectInfo = visualObjects.find(obj => obj.name === selectedObject);
             if (objectInfo && objectInfo.correctWord === item.name) {
-                // CORRECT match - track as successful attempt                
+                // CORRECT match - update matches state and clear selections                
                 setMatches(prev => ({
                     ...prev,
                     [selectedObject]: item.name
