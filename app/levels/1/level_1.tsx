@@ -10,11 +10,8 @@ import {
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import BackButton from '../../misc/BackButton';
-import { getNextLevelId, getNextLevelScreenName, handleLevelCompletion } from '../../misc/levelCompletion';
 import NextButton from '../../misc/NextButton';
 import { LevelMode } from '../../misc/progress';
-import { recordWordAttempt } from '../../misc/wordPracticeTracker'; // Import tracking function
-import LevelCompleteModal from '../../screens/LevelCompleteModal';
 import { getResponsivePos } from '../../misc/responsivePosition';
 
 LogBox.ignoreLogs([
@@ -121,7 +118,6 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const [selectedObject, setSelectedObject] = useState<string | null>(null);
     const [matches, setMatches] = useState<Record<string, string>>({});
     const [canContinue, setCanContinue] = useState(false);
-    const [attemptHistory, setAttemptHistory] = useState<Record<string, boolean>>({}); // Track incorrect attempts
 
     const LEVEL_ID = 1;
     const LEVEL_MODE = LevelMode.READ;
@@ -130,7 +126,6 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const [tutorialStep, setTutorialStep] = useState(0);
     const [toucanEnabled, setToucanEnabled] = useState(true);
     const [levelCompleted, setLevelCompleted] = useState(false);
-    const [showCompletionModal, setShowCompletionModal] = useState(false);
 
     // Animation values for visual objects
     const animatedValues = useRef(
@@ -144,16 +139,6 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const toucanPosition = useRef(new Animated.ValueXY({ x: wp('70%'), y: hp('70%') })).current;
     const bubbleOpacity = useRef(new Animated.Value(0)).current;
     const elementHighlight = useRef(new Animated.Value(0)).current;
-
-    // Track word attempts for practice system
-    const trackWordAttempt = async (word: string, isCorrect: boolean) => {
-        try {
-            await recordWordAttempt(word, LEVEL_ID, LEVEL_MODE, isCorrect);
-            console.log(`Tracked attempt for "${word}": ${isCorrect ? 'correct' : 'incorrect'}`);
-        } catch (error) {
-            console.error('Error tracking word attempt:', error);
-        }
-    };
 
     // Load settings and setup toucan guide
     useEffect(() => {
@@ -320,25 +305,6 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
         }
     };
 
-    // Handle navigation to next level
-    const handleNavigateToNextLevel = () => {
-        const nextLevelId = getNextLevelId(LEVEL_ID);
-        const nextScreenName = getNextLevelScreenName(nextLevelId, LEVEL_MODE);
-
-        if (nextScreenName) {
-            setShowCompletionModal(false);
-            navigation.navigate(nextScreenName);
-        } else {
-            handleModalClose();
-        }
-    };
-
-    // Handle modal close button
-    const handleModalClose = () => {
-        setShowCompletionModal(false);
-        navigation.navigate('LevelMapping');
-    };
-
     // Complete toucan tutorial and save state
     const completeTutorial = async () => {
         try {
@@ -380,9 +346,7 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
         if (selectedObject) {
             const objectInfo = visualObjects.find(obj => obj.name === selectedObject);
             if (objectInfo && objectInfo.correctWord === item.name) {
-                // CORRECT match - track as successful attempt
-                await trackWordAttempt(item.name, true);
-                
+                // CORRECT match - update matches state and clear selections                
                 setMatches(prev => ({
                     ...prev,
                     [selectedObject]: item.name
@@ -397,9 +361,6 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
                     advanceTutorial();
                 }
             } else {
-                // INCORRECT match - track as failed attempt
-                await trackWordAttempt(item.name, false);
-                
                 setSelectedWord(selectedWord === item.name ? null : item.name);
             }
         } else {
@@ -423,8 +384,6 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
         if (selectedWord) {
             const objectInfo = visualObjects.find(obj => obj.name === objectName);
             if (objectInfo && objectInfo.correctWord === selectedWord) {
-                // CORRECT match - track as successful attempt
-                await trackWordAttempt(selectedWord, true);
                 
                 setMatches(prev => ({
                     ...prev,
@@ -439,9 +398,6 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
                 if (tutorialStep === 3 && Object.keys(matches).length === 0) {
                     advanceTutorial();
                 }
-            } else {
-                // INCORRECT match - track as failed attempt
-                await trackWordAttempt(selectedWord, false);
             }
         }
     };
@@ -454,13 +410,7 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
         if (Object.keys(matches).length === visualObjects.length && !levelCompleted) {
             console.log('All matches made, enabling continue button');
             setCanContinue(true);
-
-            // Delayed completion to allow user to see final match
-            setTimeout(async () => {
-                // Mark level as completed and show completion modal
-                await handleLevelCompletion(LEVEL_ID, LEVEL_MODE, setShowCompletionModal);
-                setLevelCompleted(true);
-            }, 1000);
+            setLevelCompleted(true);
         }
     }, [matches, levelCompleted]);
 
@@ -617,14 +567,6 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
                         })}
                     </View>
                 </ImageBackground>
-                {/* Level completion modal */}
-                <LevelCompleteModal
-                    visible={showCompletionModal}
-                    levelId={LEVEL_ID}
-                    mode={LEVEL_MODE}
-                    onClose={handleModalClose}
-                    onNextLevel={handleNavigateToNextLevel}
-                />
             </SafeAreaView>
         </SafeAreaProvider>
     );

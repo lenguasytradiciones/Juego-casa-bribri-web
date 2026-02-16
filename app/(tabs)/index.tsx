@@ -15,7 +15,6 @@ import Guide6 from '../levels/6/guide_6';
 import Level6 from '../levels/6/level_6';
 import Guide7 from '../levels/7/guide_7';
 import Level7 from '../levels/7/level_7';
-import WordsPractice from '../levels/practice/WordsPractice'; // Import the new practice screen
 import Guide1Listen from '../levels_listen/1/guide_1_listen';
 import Level1Listen from '../levels_listen/1/level_1_listen';
 import Guide2Listen from '../levels_listen/2/guide_2_listen';
@@ -52,12 +51,6 @@ export default function App() {
       <Stack.Screen
         name="LevelMapping"
         component={LevelMapping}
-        options={{ headerShown: false }}
-      />
-      {/* New WordsPractice Screen */}
-      <Stack.Screen
-        name="WordsPractice"
-        component={WordsPractice}
         options={{ headerShown: false }}
       />
       <Stack.Screen
