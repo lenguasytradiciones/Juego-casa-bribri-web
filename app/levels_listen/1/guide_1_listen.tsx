@@ -12,7 +12,6 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const bgImage = require('@/assets/images/guia1.png');
 
   const [mode, setMode] = useState<'read' | 'listen' | null>(null);
-  const [playbackSpeed, setPlaybackSpeed] = useState<'normal' | 'slow'>('normal');
 
   useEffect(() => {
     const fetchMode = async () => {
@@ -20,22 +19,6 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       setMode(storedMode === 'read' || storedMode === 'listen' ? storedMode : 'listen');
     };
     fetchMode();
-  }, []);
-
-  // Load speed preference from storage
-  useEffect(() => {
-    const loadSpeedPreference = async () => {
-      try {
-        const savedSpeed = await AsyncStorage.getItem('audioPlaybackSpeed');
-        if (savedSpeed === 'slow' || savedSpeed === 'normal') {
-          setPlaybackSpeed(savedSpeed);
-        }
-      } catch (error) {
-        console.error('Error loading speed preference:', error);
-      }
-    };
-
-    loadSpeedPreference();
   }, []);
 
   // Draggable elements are used here only to retrieve the audio files.
@@ -134,17 +117,13 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     }
   ];
 
-  // Function to play audio with speed control
+  // Function to play audio
   const playSound = async (audioName: string) => {
     const element = draggableElements.find(e => e.name === audioName);
     if (!element) return;
 
     try {
       const { sound } = await Audio.Sound.createAsync(element.audio);
-
-      // Set playback rate based on speed setting
-      const rate = playbackSpeed === 'slow' ? 0.7 : 1.0;
-      await sound.setRateAsync(rate, true); // true preserves pitch
 
       await sound.playAsync();
 
@@ -158,19 +137,6 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       console.error('Error playing sound', error);
     }
   };
-
-  // Toggle playback speed function
-  const togglePlaybackSpeed = async () => {
-    const newSpeed = playbackSpeed === 'normal' ? 'slow' : 'normal';
-    setPlaybackSpeed(newSpeed);
-
-    try {
-      await AsyncStorage.setItem('audioPlaybackSpeed', newSpeed);
-    } catch (error) {
-      console.error('Error saving speed preference:', error);
-    }
-  };
-
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -179,30 +145,6 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
           style={styles.bgImage}
           imageStyle={{ resizeMode: 'contain' }}
         >
-
-          {/* Speed Control Button */}
-          <TouchableOpacity
-            style={styles.speedButton}
-            onPress={togglePlaybackSpeed}
-          >
-            <View style={[
-              styles.speedButtonContent,
-              { backgroundColor: playbackSpeed === 'slow' ? '#4CAF50' : '#2196F3' }
-            ]}>
-              <Image
-                source={playbackSpeed === 'slow'
-                  ? require('@/assets/images/audio.png')  // You'll need to add this icon
-                  : require('@/assets/images/audio.png') // You'll need to add this icon
-                }
-                style={styles.speedIcon}
-                resizeMode="contain"
-              />
-              <Text style={styles.speedText}>
-                {playbackSpeed === 'slow' ? 'Lento' : 'Normal'}
-              </Text>
-            </View>
-          </TouchableOpacity>
-
           {/* Audio boxes overlay on the background */}
           {audioBoxesData.map((box) => (
             <TouchableOpacity
@@ -255,32 +197,6 @@ const styles = StyleSheet.create({
     top: hp('50.5%'),
     left: wp('-4%'),
     zIndex: 5,
-  },
-  speedButton: {
-    position: 'absolute',
-    top: hp('15%'),
-    resizeMode: 'contain',
-    right: wp('5%'),
-    zIndex: 30,
-  },
-  speedButtonContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: wp('3%'),
-    paddingVertical: hp('1%'),
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: 'white',
-  },
-  speedIcon: {
-    width: wp('4%'),
-    height: hp('4%'),
-    marginRight: wp('1%'),
-  },
-  speedText: {
-    color: 'white',
-    fontSize: hp('2%'),
-    fontWeight: 'bold',
   },
 });
 
