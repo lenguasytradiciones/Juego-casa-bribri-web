@@ -22,17 +22,12 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [tutorialStep, setTutorialStep] = useState(0);
   const [toucanEnabled, setToucanEnabled] = useState<boolean | null>(null);
   const [showPDFModal, setShowPDFModal] = useState(false);
-  const [showIntonationModal, setShowIntonationModal] = useState(false);
 
   const toucanPosition = useRef(new Animated.ValueXY({ x: wp('70%'), y: hp('15%') })).current;
   const toucanScale = useRef(new Animated.Value(0)).current;
   const bubbleOpacity = useRef(new Animated.Value(0)).current;
   const buttonHighlight = useRef(new Animated.Value(0)).current;
 
-
-  const handleIntonationGuide = () => {
-    setShowIntonationModal(true);
-  };
 
   // Use useFocusEffect to check settings every time the screen comes into focus
   useFocusEffect(
@@ -335,12 +330,6 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           <Text style={styles.manualButtonText}>📖</Text>
         </TouchableOpacity> */}
 
-        {/* Intonation Guide Button */}
-        {/* <TouchableOpacity onPress={handleIntonationGuide} style={styles.intonationButton}>
-          <Text style={styles.intonationButtonText}>🎵</Text>
-        </TouchableOpacity> */}
-
-
         {/* Toucan Guide with animated position */}
         {(toucanEnabled === true) && (
           <Animated.View
@@ -399,140 +388,6 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
             />
           </TouchableOpacity>
         </View>
-
-        {/* Intonation Guide Modal */}
-        <Modal
-          visible={showIntonationModal}
-          animationType="slide"
-          onRequestClose={() => setShowIntonationModal(false)}
-        >
-          <SafeAreaView style={styles.modalContainer}>
-            {/* Modal Header */}
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Guía de Intonaciones BriBri</Text>
-              <TouchableOpacity
-                onPress={() => setShowIntonationModal(false)}
-                style={styles.closeButton}
-              >
-                <Text style={styles.closeButtonText}>✕</Text>
-              </TouchableOpacity>
-            </View>
-
-            {/* Intonation Content */}
-            <ScrollView style={styles.intonationContainer} contentContainerStyle={styles.intonationContent}>
-              <Text style={styles.intonationTitle}>Convenciones Ortográficas del BriBri</Text>
-
-              <View style={styles.alphabetSection}>
-                <Text style={styles.sectionTitle}>Alfabeto BriBri</Text>
-                <View style={styles.alphabetContainer}>
-                  <Text style={styles.alphabetText}>
-                    a a̱ b ch d e ë e̱ i i̱ j k l m n ñ o ö o̱ p r s sh t tk ts u u̱ w y &apos;
-                  </Text>
-                </View>
-              </View>
-
-              {/* Consonants Section */}
-              <View style={styles.phonemeSection}>
-                <Text style={styles.sectionTitle}>Consonantes</Text>
-                {[
-                  { letter: 'b', ipa: '[b]', desc: 'Como la b en bola', wiki: 'Voiced_bilabial_plosive' },
-                  { letter: 'ch', ipa: '[t͡ʃ]', desc: 'Como ch en chico', wiki: 'Voiceless_postalveolar_affricate' },
-                  { letter: 'd', ipa: '[d]', desc: 'Como la d en dar', wiki: 'Voiced_dental_and_alveolar_plosives' },
-                  { letter: 'j', ipa: '[x]', desc: 'Como la j en jabón', wiki: 'Voiceless_velar_fricative' },
-                  { letter: 'k', ipa: '[k]', desc: 'Como la c en casa', wiki: 'Voiceless_velar_plosive' },
-                  { letter: 'l', ipa: '[ɽ]/[ɺ]', desc: 'Sonido intermedio entre l y r', wiki: 'Retroflex_flap' },
-                  { letter: 'm', ipa: '[m]', desc: 'Como la m en madre', wiki: 'Bilabial_nasal' },
-                  { letter: 'n', ipa: '[n]', desc: 'Como la n en nariz', wiki: 'Dental,_alveolar_and_postalveolar_nasals' },
-                  { letter: 'ñ', ipa: '[ɲ]', desc: 'Como la ñ en caña', wiki: 'Palatal_nasal' },
-                  { letter: 'p', ipa: '[p]', desc: 'Como la p en pata', wiki: 'Voiceless_bilabial_plosive' },
-                  { letter: 'r', ipa: '[ɾ]', desc: 'Como la r en caro', wiki: 'Dental_and_alveolar_flaps' },
-                  { letter: 's', ipa: '[s]', desc: 'Como la s en sal', wiki: 'Voiceless_alveolar_fricative' },
-                  { letter: 'sh', ipa: '[ʃ]', desc: 'Como sh en inglés shoe', wiki: 'Voiceless_postalveolar_fricative' },
-                  { letter: 't', ipa: '[t]', desc: 'Como la t en tío', wiki: 'Voiceless_dental_and_alveolar_plosives' },
-                  { letter: 'tk', ipa: '[t˺c]/[t͡ːʃ]', desc: 'Pronunciación variable según región', wiki: 'Ejective_consonant' },
-                  { letter: 'ts', ipa: '[t͡s]', desc: 'Como zz en pizza italiana', wiki: 'Voiceless_alveolar_affricate' },
-                  { letter: 'w', ipa: '[w]', desc: 'Como la u en huevo', wiki: 'Voiced_labio-velar_approximant' },
-                  { letter: 'y', ipa: '[d͡ʒ]', desc: 'Como la y en yo', wiki: 'Voiced_postalveolar_affricate' },
-                  { letter: "'", ipa: '[ʔ]', desc: 'Cierre momentáneo de cuerdas vocales', wiki: 'Glottal_stop' }
-                ].map((consonant, index) => (
-                  <View key={index} style={styles.phonemeRow}>
-                    <Text style={styles.phonemeLetter}>{consonant.letter}</Text>
-                    <TouchableOpacity
-                      style={styles.ipaButton}
-                      onPress={() => openLink(`https://en.wikipedia.org/wiki/${consonant.wiki}`)}
-                    >
-                      <Text style={styles.ipaText}>{consonant.ipa}</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.phonemeDesc}>{consonant.desc}</Text>
-                  </View>
-                ))}
-              </View>
-
-              {/* Vowels Section */}
-              <View style={styles.phonemeSection}>
-                <Text style={styles.sectionTitle}>Vocales</Text>
-                <Text style={styles.sectionNote}>
-                  El BriBri tiene vocales nasales (marcadas con subrayado) y dos vocales adicionales: ë y ö
-                </Text>
-                {[
-                  { letter: 'a', ipa: '[a]', desc: 'Como la a en español', wiki: 'Open_front_unrounded_vowel' },
-                  { letter: 'a̱', ipa: '[ã]', desc: 'Como la a, pero nasal', wiki: 'Nasal_vowel' },
-                  { letter: 'e', ipa: '[e]', desc: 'Como la e en español', wiki: 'Close-mid_front_unrounded_vowel' },
-                  { letter: 'ë', ipa: '[ɪ]', desc: 'Sonido intermedio entre i y e', wiki: 'Near-close_near-front_unrounded_vowel' },
-                  { letter: 'e̱', ipa: '[ẽ]', desc: 'Como la e, pero nasal', wiki: 'Nasal_vowel' },
-                  { letter: 'i', ipa: '[i]', desc: 'Como la i en español', wiki: 'Close_front_unrounded_vowel' },
-                  { letter: 'i̱', ipa: '[ĩ]', desc: 'Como la i, pero nasal', wiki: 'Nasal_vowel' },
-                  { letter: 'o', ipa: '[o]', desc: 'Como la o en español', wiki: 'Close-mid_back_rounded_vowel' },
-                  { letter: 'ö', ipa: '[ʊ]', desc: 'Sonido intermedio entre u y o', wiki: 'Near-close_near-back_rounded_vowel' },
-                  { letter: 'o̱', ipa: '[õ]', desc: 'Como la o, pero nasal', wiki: 'Nasal_vowel' },
-                  { letter: 'u', ipa: '[u]', desc: 'Como la u en español', wiki: 'Close_back_rounded_vowel' },
-                  { letter: 'u̱', ipa: '[ũ]', desc: 'Como la u, pero nasal', wiki: 'Nasal_vowel' }
-                ].map((vowel, index) => (
-                  <View key={index} style={styles.phonemeRow}>
-                    <Text style={styles.phonemeLetter}>{vowel.letter}</Text>
-                    <TouchableOpacity
-                      style={styles.ipaButton}
-                      onPress={() => openLink(`https://en.wikipedia.org/wiki/${vowel.wiki}`)}
-                    >
-                      <Text style={styles.ipaText}>{vowel.ipa}</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.phonemeDesc}>{vowel.desc}</Text>
-                  </View>
-                ))}
-              </View>
-
-              {/* Tones Section */}
-              <View style={styles.phonemeSection}>
-                <Text style={styles.sectionTitle}>Tonos</Text>
-                <Text style={styles.sectionNote}>
-                  El BriBri es una lengua de acento tonal. Los diacríticos marcan tanto el acento como el tipo de tono.
-                </Text>
-                {[
-                  { mark: '´', ipa: '[´]', desc: 'Tono alto o ascendente', wiki: 'Tone_(linguistics)' },
-                  { mark: '`', ipa: '[ˆ]', desc: 'Tono descendente', wiki: 'Tone_(linguistics)' },
-                  { mark: 'ˆ', ipa: '[ˇ]', desc: 'Tono ascendente (dialecto Amubre)', wiki: 'Tone_(linguistics)' }
-                ].map((tone, index) => (
-                  <View key={index} style={styles.phonemeRow}>
-                    <Text style={styles.phonemeLetter}>{tone.mark}</Text>
-                    <TouchableOpacity
-                      style={styles.ipaButton}
-                      onPress={() => openLink(`https://en.wikipedia.org/wiki/${tone.wiki}`)}
-                    >
-                      <Text style={styles.ipaText}>{tone.ipa}</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.phonemeDesc}>{tone.desc}</Text>
-                  </View>
-                ))}
-              </View>
-
-              <View style={styles.footerSection}>
-                <Text style={styles.footerText}>
-                  Toca los símbolos IPA (entre corchetes) para aprender más sobre cada sonido en Wikipedia.
-                </Text>
-              </View>
-            </ScrollView>
-          </SafeAreaView>
-        </Modal>
 
         {/* Highlight for bottom buttons during tutorial */}
         {tutorialStep === 5 && (
@@ -668,127 +523,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 5,
   },
-  // Intonation Guide Styles
-  intonationContainer: {
-    flex: 1,
-    backgroundColor: '#f8f9fa',
-  },
-  intonationContent: {
-    padding: wp('5%'),
-  },
-  intonationTitle: {
-    fontSize: hp('3%'),
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: hp('1%'),
-    textAlign: 'center',
-  },
-  intonationSubtitle: {
-    fontSize: hp('2%'),
-    color: '#666',
-    marginBottom: hp('3%'),
-    textAlign: 'center',
-    fontStyle: 'italic',
-  },
-  alphabetSection: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: wp('4%'),
-    marginBottom: hp('2%'),
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  sectionTitle: {
-    fontSize: hp('2.5%'),
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: hp('1.5%'),
-  },
-  alphabetContainer: {
-    backgroundColor: '#f0f8ff',
-    padding: wp('3%'),
-    borderRadius: 8,
-    borderLeftWidth: 4,
-    borderLeftColor: '#4169E1',
-  },
-  alphabetText: {
-    fontSize: hp('2.2%'),
-    color: '#333',
-    textAlign: 'center',
-    lineHeight: hp('3%'),
-    fontFamily: 'monospace',
-  },
-  phonemeSection: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: wp('4%'),
-    marginBottom: hp('2%'),
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  sectionNote: {
-    fontSize: hp('1.8%'),
-    color: '#666',
-    marginBottom: hp('2%'),
-    fontStyle: 'italic',
-    textAlign: 'center',
-  },
-  phonemeRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: hp('1%'),
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  phonemeLetter: {
-    fontSize: hp('2.2%'),
-    fontWeight: 'bold',
-    color: '#333',
-    width: wp('12%'),
-    textAlign: 'center',
-    fontFamily: 'monospace',
-  },
-  ipaButton: {
-    backgroundColor: '#e3f2fd',
-    paddingHorizontal: wp('2%'),
-    paddingVertical: hp('0.5%'),
-    borderRadius: 5,
-    marginHorizontal: wp('2%'),
-    minWidth: wp('15%'),
-  },
-  ipaText: {
-    fontSize: hp('2%'),
-    color: '#1976d2',
-    textAlign: 'center',
-    fontFamily: 'monospace',
-    fontWeight: 'bold',
-  },
-  phonemeDesc: {
-    fontSize: hp('1.8%'),
-    color: '#555',
-    flex: 1,
-    paddingLeft: wp('2%'),
-  },
-  footerSection: {
-    backgroundColor: '#fff3cd',
-    padding: wp('4%'),
-    borderRadius: 10,
-    borderLeftWidth: 4,
-    borderLeftColor: '#ffc107',
-    marginTop: hp('2%'),
-  },
-  footerText: {
-    fontSize: hp('1.8%'),
-    color: '#856404',
-    textAlign: 'center',
-    fontStyle: 'italic',
-  },
   buttonImageContainer: {
     zIndex: 6,
   },
@@ -912,20 +646,6 @@ const styles = StyleSheet.create({
     height: hp('30%'),
     borderRadius: 15,
     zIndex: 4,
-  },
-  intonationButton: {
-    position: 'absolute',
-    top: hp('5%'),
-    right: wp('20%'),
-    zIndex: 6,
-    width: wp('12%'),
-    height: hp('12%'),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  intonationButtonText: {
-    fontSize: hp('6%'),
-    color: '#4169E1',
   },
   // Modal Styles
   modalContainer: {
