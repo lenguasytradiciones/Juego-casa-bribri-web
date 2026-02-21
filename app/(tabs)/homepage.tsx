@@ -21,7 +21,6 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [tutorialStep, setTutorialStep] = useState(0);
   const [toucanEnabled, setToucanEnabled] = useState<boolean | null>(null);
-  const [showPDFModal, setShowPDFModal] = useState(false);
 
   const toucanPosition = useRef(new Animated.ValueXY({ x: wp('70%'), y: hp('15%') })).current;
   const toucanScale = useRef(new Animated.Value(0)).current;
@@ -253,13 +252,6 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
     }
   }
 
-  const handleManualPreview = () => {
-    if (tutorialStep === 4) {
-      advanceTutorial();
-    }
-    setShowPDFModal(true);
-  };
-
   const handleToucanPress = () => {
     if (tutorialStep === 0) {
       // Start the tutorial from the beginning
@@ -324,11 +316,6 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           style={styles.backgroundImage}
           resizeMode={Platform.OS === 'web' ? 'stretch' : 'stretch'}
         />
-
-        {/* Manual Button */}
-        {/* <TouchableOpacity onPress={handleManualPreview} style={styles.manualButton}>
-          <Text style={styles.manualButtonText}>📖</Text>
-        </TouchableOpacity> */}
 
         {/* Toucan Guide with animated position */}
         {(toucanEnabled === true) && (
@@ -441,58 +428,6 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
             </TouchableOpacity>
           </View>
         </View>
-
-        {/* PDF Preview Modal - Using local PDF with multiple fallback options */}
-        <Modal
-          visible={showPDFModal}
-          animationType="slide"
-          onRequestClose={() => setShowPDFModal(false)}
-        >
-          <SafeAreaView style={styles.modalContainer}>
-            {/* Modal Header */}
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Manual Original BriBri</Text>
-              <TouchableOpacity
-                onPress={() => setShowPDFModal(false)}
-                style={styles.closeButton}
-              >
-                <Text style={styles.closeButtonText}>✕</Text>
-              </TouchableOpacity>
-            </View>
-
-            {/* PDF Content - Try multiple approaches */}
-            <ScrollView style={styles.pdfContainer} contentContainerStyle={styles.pdfContent}>
-              <Text style={styles.pdfTitle}>Diccionario de la Casa Tradicional BriBri</Text>
-              <Text style={styles.pdfSubtitle}>Universidad de Costa Rica</Text>
-
-              <View style={styles.pdfInfoContainer}>
-                <Text style={styles.pdfDescription}>
-                  Este manual contiene el vocabulario tradicional BriBri relacionado con la casa y sus elementos.
-                </Text>
-
-                <TouchableOpacity
-                  style={styles.downloadButton}
-                  onPress={() => {
-                    openLink('https://www.dipalicori.ucr.ac.cr/wp-content/uploads/Diccionario_casa_tradicional_bribri.pdf')
-                  }}
-                >
-                  <Text style={styles.downloadButtonText}>Ver Manual Completo</Text>
-                </TouchableOpacity>
-
-                <View style={styles.vocabularyPreview}>
-                  <Text style={styles.vocabularyTitle}>Vocabulario incluido en la app:</Text>
-                  <Text style={styles.vocabularyItem}>• alè - alero</Text>
-                  <Text style={styles.vocabularyItem}>• ñolö nkuö - caminito de la casa</Text>
-                  <Text style={styles.vocabularyItem}>• kapö - hamaca</Text>
-                  <Text style={styles.vocabularyItem}>• ñolö kibí - camino antes de la casa</Text>
-                  <Text style={styles.vocabularyItem}>• tso klowok - puerta</Text>
-                  <Text style={styles.vocabularyItem}>• shkéki - ventana</Text>
-                  <Text style={styles.vocabularyItem}>• y muchas más...</Text>
-                </View>
-              </View>
-            </ScrollView>
-          </SafeAreaView>
-        </Modal>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -646,110 +581,6 @@ const styles = StyleSheet.create({
     height: hp('30%'),
     borderRadius: 15,
     zIndex: 4,
-  },
-  // Modal Styles
-  modalContainer: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: wp('5%'),
-    paddingVertical: hp('2%'),
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-    backgroundColor: '#f8f9fa',
-  },
-  modalTitle: {
-    fontSize: hp('2.5%'),
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  closeButton: {
-    padding: 10,
-    backgroundColor: '#e74c3c',
-    borderRadius: 20,
-    minWidth: 40,
-    alignItems: 'center',
-  },
-  closeButtonText: {
-    color: 'white',
-    fontSize: hp('2.5%'),
-    fontWeight: 'bold',
-  },
-  pdfContainer: {
-    flex: 1,
-    backgroundColor: '#f8f9fa',
-  },
-  pdfContent: {
-    padding: wp('5%'),
-    alignItems: 'center',
-  },
-  pdfTitle: {
-    fontSize: hp('3%'),
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: hp('1%'),
-    textAlign: 'center',
-  },
-  pdfSubtitle: {
-    fontSize: hp('2%'),
-    color: '#666',
-    marginBottom: hp('3%'),
-    textAlign: 'center',
-  },
-  pdfInfoContainer: {
-    width: '100%',
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: wp('5%'),
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  pdfDescription: {
-    fontSize: hp('2%'),
-    color: '#555',
-    textAlign: 'center',
-    marginBottom: hp('3%'),
-    lineHeight: hp('2.5%'),
-  },
-  downloadButton: {
-    backgroundColor: '#3498db',
-    paddingVertical: hp('1.5%'),
-    paddingHorizontal: wp('8%'),
-    borderRadius: 25,
-    marginBottom: hp('3%'),
-    alignSelf: 'center',
-  },
-  downloadButtonText: {
-    color: 'white',
-    fontSize: hp('2%'),
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  vocabularyPreview: {
-    backgroundColor: '#f0f8ff',
-    padding: wp('4%'),
-    borderRadius: 10,
-    borderLeftWidth: 4,
-    borderLeftColor: '#3498db',
-  },
-  vocabularyTitle: {
-    fontSize: hp('2.2%'),
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: hp('1%'),
-  },
-  vocabularyItem: {
-    fontSize: hp('1.8%'),
-    color: '#555',
-    marginBottom: hp('0.5%'),
-    paddingLeft: wp('2%'),
   },
 });
 
