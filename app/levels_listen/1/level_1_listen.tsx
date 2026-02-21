@@ -112,7 +112,6 @@ const Level1Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [selectedZone, setSelectedZone] = useState<string | null>(null);
   const [matches, setMatches] = useState<Record<string, boolean>>({});
   const [canContinue, setCanContinue] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState<'normal' | 'slow'>('normal');
   const [animatedValues] = useState(() =>
     dropZones.reduce((acc, zone) => {
       acc[zone.name] = new Animated.Value(1);
@@ -123,30 +122,10 @@ const Level1Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const LEVEL_ID = 1;
   const LEVEL_MODE = LevelMode.LISTEN;
 
-  // Load speed preference from storage
-  useEffect(() => {
-    const loadSpeedPreference = async () => {
-      try {
-        const savedSpeed = await AsyncStorage.getItem('audioPlaybackSpeed');
-        if (savedSpeed === 'slow' || savedSpeed === 'normal') {
-          setPlaybackSpeed(savedSpeed);
-        }
-      } catch (error) {
-        console.error('Error loading speed preference:', error);
-      }
-    };
-    
-    loadSpeedPreference();
-  }, []);
-
   const playSound = async (audio: any) => {
     try {
       const { sound } = await Audio.Sound.createAsync(audio);
-      
-      // Set playback rate based on speed setting
-      const rate = playbackSpeed === 'slow' ? 0.7 : 1.0;
-      await sound.setRateAsync(rate, true); // true preserves pitch
-      
+
       await sound.playAsync();
       
       // Clean up sound object after playback
@@ -157,17 +136,6 @@ const Level1Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       });
     } catch (error) {
       console.error('Error playing sound', error);
-    }
-  };
-
-  const togglePlaybackSpeed = async () => {
-    const newSpeed = playbackSpeed === 'normal' ? 'slow' : 'normal';
-    setPlaybackSpeed(newSpeed);
-    
-    try {
-      await AsyncStorage.setItem('audioPlaybackSpeed', newSpeed);
-    } catch (error) {
-      console.error('Error saving speed preference:', error);
     }
   };
 
@@ -295,29 +263,6 @@ const Level1Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             <BackButton navigation={navigation} />
           </View>
 
-          {/* Speed Control Button */}
-          <TouchableOpacity
-            style={styles.speedButton}
-            onPress={togglePlaybackSpeed}
-          >
-            <View style={[
-              styles.speedButtonContent,
-              { backgroundColor: playbackSpeed === 'slow' ? '#4CAF50' : '#2196F3' }
-            ]}>
-              <Image
-                source={playbackSpeed === 'slow' 
-                  ? require('@/assets/images/audio.png')  // You'll need to add this icon
-                  : require('@/assets/images/audio.png') // You'll need to add this icon
-                }
-                style={styles.speedIcon}
-                resizeMode="contain"
-              />
-              <Text style={styles.speedText}>
-                {playbackSpeed === 'slow' ? 'Lento' : 'Normal'}
-              </Text>
-            </View>
-          </TouchableOpacity>
-
           {/* Next Button */}
           {canContinue && (
             <View style={styles.buttonsNextContainer}>
@@ -426,31 +371,6 @@ const styles = StyleSheet.create({
     bottom: hp('-3%'),
     right: wp('-6%'),
     zIndex: 1,
-  },
-  speedButton: {
-    position: 'absolute',
-    top: hp('5%'),
-    right: wp('5%'),
-    zIndex: 10,
-  },
-  speedButtonContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: wp('3%'),
-    paddingVertical: hp('1%'),
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: 'white',
-  },
-  speedIcon: {
-    width: wp('4%'),
-    height: hp('4%'),
-    marginRight: wp('1%'),
-  },
-  speedText: {
-    color: 'white',
-    fontSize: hp('2%'),
-    fontWeight: 'bold',
   },
   buttonsContainer: {
     position: 'absolute',
