@@ -6,10 +6,7 @@ import {
   Alert,
   Animated,
   Easing,
-  Linking,
-  Modal,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -241,16 +238,6 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
       [{ text: 'Cerrar', style: 'default' }]
     );
   };
-
-  const openLink = async (url: string) => {
-    // Open the provided URL in the default browser
-    const supported = await Linking.canOpenURL(url);
-    if (supported) {
-      Linking.openURL(url);
-    } else {
-      Alert.alert(`No se puede abrir el enlace: ${url}`);
-    }
-  }
 
   const handleToucanPress = () => {
     if (tutorialStep === 0) {
