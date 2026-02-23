@@ -393,7 +393,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   />
                 )}
 
-                <HoverTooltip explanation="Asociar audio con imagen">
+                <HoverTooltip explanation="Asociar audio con imagen" tooltipStyle={{ bottom: '75%' }}> 
                   <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.button}
@@ -407,7 +407,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   </TouchableOpacity>
                 </HoverTooltip>
 
-                <HoverTooltip explanation='Asociar texto con imagen'>
+                <HoverTooltip explanation='Asociar texto con imagen' tooltipStyle={{ bottom: '75%' }}>
                   <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.button}
