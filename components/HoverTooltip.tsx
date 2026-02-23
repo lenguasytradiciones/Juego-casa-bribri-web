@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: '120%',  // Positions tooltip a bit above the content
     zIndex: 999,  // Makes sure tooltip is above other elements
-    width: 200,  // Consistent width to calculate center
+    width: 225,  // Consistent width to calculate center
     alignItems: 'center',
   },
   bubble: {
