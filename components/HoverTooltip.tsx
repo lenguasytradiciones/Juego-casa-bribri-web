@@ -6,17 +6,18 @@ interface HoverTooltipProps {
   children: ReactNode;      // Allows any valid React element
   explanation: string;      // The text to display
   containerStyle?: ViewStyle; // Optional custom styling for the wrapper
+  tooltipStyle?: ViewStyle; // Optional custom styling for the tooltip
 }
 
 // Custom Tooltip Component. Usage: Wrap around components and specify explanation
-const HoverTooltip: React.FC<HoverTooltipProps> = ({ children, explanation, containerStyle }) => {
+const HoverTooltip: React.FC<HoverTooltipProps> = ({ children, explanation, containerStyle, tooltipStyle }) => {
   const [visible, setVisible] = useState<boolean>(false);
 
   return (
     <View style={[styles.wrapper, containerStyle]}>
       {/* Tooltip */}
       {visible && ( // pointerEvents set to none to avoid flickering
-        <View style={styles.tooltipContainer} pointerEvents="none">
+        <View style={[styles.tooltipContainer, tooltipStyle]} pointerEvents="none">
           <View style={styles.bubble}>
             <Text style={styles.tooltipText}>{explanation}</Text>
           </View>
