@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import HoverTooltip from '@/components/HoverTooltip';
 
 const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [tutorialStep, setTutorialStep] = useState(0);
@@ -354,13 +355,15 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           )}
 
           {/* Botón "Jugar" */}
-          <TouchableOpacity onPress={handlePress} style={styles.buttonImageContainer}>
-            <Image
-              source={require('@/assets/images/jugar.png')}
-              style={styles.buttonImage}
-              resizeMode="stretch"
-            />
-          </TouchableOpacity>
+          <HoverTooltip explanation="Jugar">
+            <TouchableOpacity onPress={handlePress} style={styles.buttonImageContainer}>
+              <Image
+                source={require('@/assets/images/jugar.png')}
+                style={styles.buttonImage}
+                resizeMode="stretch"
+              />
+            </TouchableOpacity>
+          </HoverTooltip>
         </View>
 
         {/* Highlight for bottom buttons during tutorial */}
@@ -399,20 +402,26 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           />
           {/* Contenedor interno para centrar los botones */}
           <View style={styles.bottomButtonsContainer}>
-            <TouchableOpacity onPress={handleInstrucciones} style={styles.bottomButton}>
-              <Image
-                source={require('@/assets/images/instrucciones.png')}
-                style={styles.buttonIcon}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleCreditos} style={styles.bottomButton}>
-              <Image
-                source={require('@/assets/images/creditos.png')}
-                style={styles.buttonIcon}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
+            {/* Botón de Instrucciones (Proximamente Informacion)*/}
+            <HoverTooltip explanation='Instrucciones'>
+              <TouchableOpacity onPress={handleInstrucciones} style={styles.bottomButton}>
+                <Image
+                  source={require('@/assets/images/instrucciones.png')}
+                  style={styles.buttonIcon}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            </HoverTooltip>
+            {/* Botón de Créditos */}
+            <HoverTooltip explanation='Créditos'>
+              <TouchableOpacity onPress={handleCreditos} style={styles.bottomButton}>
+                <Image
+                  source={require('@/assets/images/creditos.png')}
+                  style={styles.buttonIcon}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            </HoverTooltip>
           </View>
         </View>
       </SafeAreaView>
