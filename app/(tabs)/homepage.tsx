@@ -355,7 +355,7 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           )}
 
           {/* Botón "Jugar" */}
-          <HoverTooltip explanation="Jugar">
+          <HoverTooltip explanation="Jugar" tooltipStyle={{ bottom: '80%' }}>
             <TouchableOpacity onPress={handlePress} style={styles.buttonImageContainer}>
               <Image
                 source={require('@/assets/images/jugar.png')}
