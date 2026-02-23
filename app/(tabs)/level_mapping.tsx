@@ -18,6 +18,7 @@ import BackButton from '../misc/BackButton';
 import { LEVELS } from '../misc/constants';
 import StarsProgress from '../screens/StarsProgress';
 import LevelStar from '../screens/LevelStar';
+import HoverTooltip from '@/components/HoverTooltip';
 
 // Define LevelMode enum for mode prop
 enum LevelMode {
@@ -392,28 +393,33 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   />
                 )}
 
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  style={styles.button}
-                  onPress={() => handleButtonClick('button1')}
-                >
-                  <Image
-                    source={require('@/assets/images/niveles_texto.png')}
-                    style={styles.buttonImage}
-                    resizeMode="stretch"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  style={styles.button}
-                  onPress={() => handleButtonClick('button2')}
-                >
-                  <Image
-                    source={require('@/assets/images/niveles_imagenes.png')}
-                    style={styles.buttonImage}
-                    resizeMode="stretch"
-                  />
-                </TouchableOpacity>
+                <HoverTooltip explanation="Asociar audio con imagen" tooltipStyle={{ bottom: '75%' }}> 
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    style={styles.button}
+                    onPress={() => handleButtonClick('button1')}
+                  >
+                    <Image
+                      source={require('@/assets/images/niveles_texto.png')}
+                      style={styles.buttonImage}
+                      resizeMode="stretch"
+                    />
+                  </TouchableOpacity>
+                </HoverTooltip>
+
+                <HoverTooltip explanation='Asociar texto con imagen' tooltipStyle={{ bottom: '75%' }}>
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    style={styles.button}
+                    onPress={() => handleButtonClick('button2')}
+                  >
+                    <Image
+                      source={require('@/assets/images/niveles_imagenes.png')}
+                      style={styles.buttonImage}
+                      resizeMode="stretch"
+                    />
+                  </TouchableOpacity>
+                </HoverTooltip>
               </View>
             ) : (
               <ScrollView

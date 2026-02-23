@@ -6,10 +6,7 @@ import {
   Alert,
   Animated,
   Easing,
-  Linking,
-  Modal,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -17,6 +14,7 @@ import {
 } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import HoverTooltip from '@/components/HoverTooltip';
 
 const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [tutorialStep, setTutorialStep] = useState(0);
@@ -242,16 +240,6 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
     );
   };
 
-  const openLink = async (url: string) => {
-    // Open the provided URL in the default browser
-    const supported = await Linking.canOpenURL(url);
-    if (supported) {
-      Linking.openURL(url);
-    } else {
-      Alert.alert(`No se puede abrir el enlace: ${url}`);
-    }
-  }
-
   const handleToucanPress = () => {
     if (tutorialStep === 0) {
       // Start the tutorial from the beginning
@@ -367,13 +355,15 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           )}
 
           {/* Botón "Jugar" */}
-          <TouchableOpacity onPress={handlePress} style={styles.buttonImageContainer}>
-            <Image
-              source={require('@/assets/images/jugar.png')}
-              style={styles.buttonImage}
-              resizeMode="stretch"
-            />
-          </TouchableOpacity>
+          <HoverTooltip explanation="Jugar" tooltipStyle={{ bottom: '80%' }}>
+            <TouchableOpacity onPress={handlePress} style={styles.buttonImageContainer}>
+              <Image
+                source={require('@/assets/images/jugar.png')}
+                style={styles.buttonImage}
+                resizeMode="stretch"
+              />
+            </TouchableOpacity>
+          </HoverTooltip>
         </View>
 
         {/* Highlight for bottom buttons during tutorial */}
@@ -412,20 +402,26 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           />
           {/* Contenedor interno para centrar los botones */}
           <View style={styles.bottomButtonsContainer}>
-            <TouchableOpacity onPress={handleInstrucciones} style={styles.bottomButton}>
-              <Image
-                source={require('@/assets/images/instrucciones.png')}
-                style={styles.buttonIcon}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleCreditos} style={styles.bottomButton}>
-              <Image
-                source={require('@/assets/images/creditos.png')}
-                style={styles.buttonIcon}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
+            {/* Botón de Instrucciones (Proximamente Informacion)*/}
+            <HoverTooltip explanation='Instrucciones'>
+              <TouchableOpacity onPress={handleInstrucciones} style={styles.bottomButton}>
+                <Image
+                  source={require('@/assets/images/instrucciones.png')}
+                  style={styles.buttonIcon}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            </HoverTooltip>
+            {/* Botón de Créditos */}
+            <HoverTooltip explanation='Créditos'>
+              <TouchableOpacity onPress={handleCreditos} style={styles.bottomButton}>
+                <Image
+                  source={require('@/assets/images/creditos.png')}
+                  style={styles.buttonIcon}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            </HoverTooltip>
           </View>
         </View>
       </SafeAreaView>
