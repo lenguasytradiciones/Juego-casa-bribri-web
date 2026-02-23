@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Image} from "expo-image";
 import {
   StyleSheet,
   View,
   TouchableOpacity,
   ScrollView,
-  Text,
-  Animated,
   Platform,
-  Easing
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
