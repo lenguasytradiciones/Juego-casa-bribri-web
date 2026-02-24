@@ -22,34 +22,46 @@ enum LevelMode {
   READ = 'read',
   LISTEN = 'listen'
 }
-
 const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
-  const [buttonClicked, setButtonClicked] = useState(false);
   const [mode, setMode] = useState<string | null>(null);
+  const [isModeSelected, setIsModeSelected] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        // Load previously selected mode
         const storedMode = await AsyncStorage.getItem('mode');
+        const storedIsModeSelected = await AsyncStorage.getItem('isModeSelected');
         setMode(storedMode);
+        setIsModeSelected(storedIsModeSelected === 'true');
       } catch (error) {
         console.error('Error loading settings:', error);
       }
     };
 
     fetchSettings();
-  }, [buttonClicked]);
+  }, []);
 
   const handleButtonClick = async (button: string) => {
     try {
       const newMode = button === 'button1' ? 'listen' : 'read';
       await AsyncStorage.setItem('mode', newMode);
+      await AsyncStorage.setItem('isModeSelected', 'true');
       console.log(`${button} clicked, ${newMode} stored in AsyncStorage`);
-      setMode(newMode); // Update the mode state
-      setButtonClicked(true);
+      setMode(newMode);
+      setIsModeSelected(true);
     } catch (error) {
       console.error('Failed to store mode in AsyncStorage:', error);
+    }
+  };
+
+  const handleBackPress = async () => {
+    if (isModeSelected) {
+      await AsyncStorage.setItem('mode', 'None');
+      await AsyncStorage.setItem('isModeSelected', 'false');
+      setIsModeSelected(false);
+      setMode(null);
+    } else {
+      navigation.navigate('HomePage');
     }
   };
 
@@ -121,17 +133,16 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
             resizeMode={Platform.OS === 'web' ? 'stretch' : 'stretch'}
           />
 
-          {/* Stars Progress Display */}
           <View style={styles.starsProgressContainer}>
             <StarsProgress showSeparateTypes={true} />
           </View>
 
-          {/* Back Button */}
-          <BackButton navigation={navigation} />
+          {/* Custom Back Button */}
+          <BackButton onPress={handleBackPress} />
 
-          {/* Contenedor central para centrar el contenido */}
+          {/* Main Content */}
           <View style={styles.content}>
-            {!buttonClicked ? (
+            {!isModeSelected ? (
               <View style={styles.buttonContainer}>
                 <HoverTooltip explanation="Asociar audio con imagen" tooltipStyle={{ bottom: '75%' }}> 
                   <TouchableOpacity
@@ -169,7 +180,6 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
               >
                 {LEVELS && LEVELS.map((level) => (
                   <View key={level.id} style={styles.levelButtonWrapper}>
-                    {/* Star display above level button */}
                     <View style={styles.levelStarContainer}>
                       <LevelStar 
                         levelId={level.id} 
@@ -185,7 +195,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                       style={styles.levelButton}
                     >
                       <Image
-                        source={buttonClicked && mode === 'read' ? level.image2 : level.image}
+                        source={isModeSelected && mode === 'read' ? level.image2 : level.image}
                         style={styles.levelImage}
                       />
                     </TouchableOpacity>
