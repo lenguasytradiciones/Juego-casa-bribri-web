@@ -28,7 +28,7 @@ const Guide = ({ navigation }: { navigation: NavigationProp<any> }) => {
             style={styles.bgImage}
             imageStyle={{ resizeMode: 'contain' }}>
             <View style={styles.buttonsBackContainer}>
-              <BackButton navigation={navigation} />
+              <BackButton/>
             </View>
             <View style={styles.buttonsNextContainer}>
                 <NextButton navigation={navigation} nextName="Level7" />

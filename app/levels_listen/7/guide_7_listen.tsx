@@ -282,7 +282,7 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
                     ))}
 
                     <View style={styles.buttonsBackContainer}>
-                        <BackButton navigation={navigation} />
+                        <BackButton/>
                     </View>
                     
                     <View style={styles.buttonsNextContainer}>

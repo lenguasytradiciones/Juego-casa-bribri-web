@@ -277,7 +277,7 @@ const Level3 = ({ navigation }: { navigation: NavigationProp<any> }) => {
             <SafeAreaView style={styles.container}>
                 {/* Back Button - Fixed position outside of ImageBackground */}
                 <View style={styles.buttonsBackContainer}>
-                    <BackButton navigation={navigation} />
+                    <BackButton/>
                 </View>
                 
                 {canContinue && (
