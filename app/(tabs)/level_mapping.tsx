@@ -23,14 +23,16 @@ enum LevelMode {
   LISTEN = 'listen'
 }
 const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
-  const [mode, setMode] = useState<string | null>(null);
-  const [isModeSelected, setIsModeSelected] = useState<boolean>(false);
+  const [mode, setMode] = useState<string | null>(null);  // Selected mode
+  const [isModeSelected, setIsModeSelected] = useState<boolean>(false);  // Flag of whether mode was selected
 
   useEffect(() => {
     const fetchSettings = async () => {
       try {
+        // Fetch mode and selection status from AsyncStorage
         const storedMode = await AsyncStorage.getItem('mode');
         const storedIsModeSelected = await AsyncStorage.getItem('isModeSelected');
+        // Set the state variables
         setMode(storedMode);
         setIsModeSelected(storedIsModeSelected === 'true');
       } catch (error) {
@@ -41,12 +43,17 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
     fetchSettings();
   }, []);
 
-  const handleButtonClick = async (button: string) => {
+  // Function for handling button clicks to select mode
+  const handleModeSelection = async (button: string) => {
     try {
-      const newMode = button === 'button1' ? 'listen' : 'read';
+      // Store new mode and selection status
+      const newMode = button === 'listenButton' ? 'listen' : 'read';
       await AsyncStorage.setItem('mode', newMode);
       await AsyncStorage.setItem('isModeSelected', 'true');
+
       console.log(`${button} clicked, ${newMode} stored in AsyncStorage`);
+
+      // Update new mode and selection status
       setMode(newMode);
       setIsModeSelected(true);
     } catch (error) {
@@ -54,17 +61,20 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
     }
   };
 
+  // Function for handling back button press
   const handleBackPress = async () => {
+    // If mode has been selected, deselect to return to mode selection
     if (isModeSelected) {
       await AsyncStorage.setItem('mode', 'None');
       await AsyncStorage.setItem('isModeSelected', 'false');
       setIsModeSelected(false);
       setMode(null);
     } else {
-      navigation.navigate('HomePage');
+      navigation.navigate('HomePage');  // Go back to homepage since mode has not been selected
     }
   };
 
+  // Function for handling level button press
   const handleLevelPress = (levelId: number) => {
     if (mode === 'read') {
       switch (levelId) {
@@ -148,7 +158,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.button}
-                    onPress={() => handleButtonClick('button1')}
+                    onPress={() => handleModeSelection('listenButton')}
                   >
                     <Image
                       source={require('@/assets/images/niveles_texto.png')}
@@ -162,7 +172,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.button}
-                    onPress={() => handleButtonClick('button2')}
+                    onPress={() => handleModeSelection('readButton')}
                   >
                     <Image
                       source={require('@/assets/images/niveles_imagenes.png')}
