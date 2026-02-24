@@ -28,8 +28,8 @@ const NextButton: React.FC<NextButtonProps> = ({ navigation, nextName }) => {
 
 const styles = StyleSheet.create({
     adelante: {
-        width: 70,
-        height: 40,
+        width: 80,
+        height: 50,
         transform: [{ rotate: '180deg' }, { translateX: 0 }, { translateY: 1 }],
         resizeMode: 'stretch',
     },

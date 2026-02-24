@@ -27,8 +27,8 @@ const BackButton: React.FC<BackButtonProps> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   atras: {
-    width: 60,
-    height: 40,
+    width: 70,
+    height: 50,
     resizeMode: 'stretch',
   },
   button: {
