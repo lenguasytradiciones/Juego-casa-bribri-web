@@ -365,7 +365,7 @@ const Level7 = ({ navigation }: { navigation: NavigationProp<any> }) => {
                 >
                     {/* Back Button */}
                     <View style={styles.buttonsBackContainer}>
-                        <BackButton navigation={navigation} />
+                        <BackButton/>
                     </View>
 
                     {/* Next Button */}

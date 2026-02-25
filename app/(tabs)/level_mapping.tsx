@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import {Image} from "expo-image";
 import {
   StyleSheet,
@@ -10,7 +10,7 @@ import {
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationProp, useFocusEffect } from '@react-navigation/native';
 import BackButton from '../misc/BackButton';
 import { LEVELS } from '../misc/constants';
 import StarsProgress from '../screens/StarsProgress';
@@ -22,37 +22,65 @@ enum LevelMode {
   READ = 'read',
   LISTEN = 'listen'
 }
-
 const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
-  const [buttonClicked, setButtonClicked] = useState(false);
-  const [mode, setMode] = useState<string | null>(null);
+  const [mode, setMode] = useState<string | null>(null);  // Selected mode
+  const [isModeSelected, setIsModeSelected] = useState<boolean>(false);  // Flag of whether mode was selected
 
-  useEffect(() => {
-    const fetchSettings = async () => {
-      try {
-        // Load previously selected mode
-        const storedMode = await AsyncStorage.getItem('mode');
-        setMode(storedMode);
-      } catch (error) {
-        console.error('Error loading settings:', error);
-      }
-    };
+  // Ensure settings are fetched every time the screen is loaded
+  useFocusEffect(
+    useCallback(() => {
+      const fetchSettings = async () => {
+        try {
+          const storedMode = await AsyncStorage.getItem('mode');
+          const storedIsModeSelected = await AsyncStorage.getItem('isModeSelected');
+          
+          setMode(storedMode);
+          setIsModeSelected(storedIsModeSelected === 'true');
+        } catch (error) {
+          console.error('Error loading settings:', error);
+        }
+      };
 
-    fetchSettings();
-  }, [buttonClicked]);
+      fetchSettings();
+    }, [])
+  )
 
-  const handleButtonClick = async (button: string) => {
+  // Function for handling button clicks to select mode
+  const handleModeSelection = async (button: string) => {
     try {
-      const newMode = button === 'button1' ? 'listen' : 'read';
+      // Store new mode and selection status
+      const newMode = button === 'listenButton' ? 'listen' : 'read';
       await AsyncStorage.setItem('mode', newMode);
+      await AsyncStorage.setItem('isModeSelected', 'true');
+
       console.log(`${button} clicked, ${newMode} stored in AsyncStorage`);
-      setMode(newMode); // Update the mode state
-      setButtonClicked(true);
+
+      // Update new mode and selection status
+      setMode(newMode);
+      setIsModeSelected(true);
     } catch (error) {
       console.error('Failed to store mode in AsyncStorage:', error);
     }
   };
 
+  // Function for handling back button press
+  const handleBackPress = async () => {
+    // If mode has been selected, deselect to return to mode selection
+    if (isModeSelected) {
+      try {
+        await AsyncStorage.removeItem('mode');
+        await AsyncStorage.setItem('isModeSelected', 'false');
+        setIsModeSelected(false);
+        setMode(null);
+      } catch (error) {
+        console.error('Error storing settings:', error);
+      }
+    } else {
+      navigation.navigate('HomePage');  // Go back to homepage since mode has not been selected
+    }
+  };
+
+  // Function for handling level button press
   const handleLevelPress = (levelId: number) => {
     if (mode === 'read') {
       switch (levelId) {
@@ -121,23 +149,22 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
             resizeMode={Platform.OS === 'web' ? 'stretch' : 'stretch'}
           />
 
-          {/* Stars Progress Display */}
           <View style={styles.starsProgressContainer}>
             <StarsProgress showSeparateTypes={true} />
           </View>
 
-          {/* Back Button */}
-          <BackButton navigation={navigation} />
+          {/* Custom Back Button */}
+          <BackButton onPress={handleBackPress} />
 
-          {/* Contenedor central para centrar el contenido */}
+          {/* Main Content */}
           <View style={styles.content}>
-            {!buttonClicked ? (
+            {!isModeSelected ? (
               <View style={styles.buttonContainer}>
                 <HoverTooltip explanation="Asociar audio con imagen" tooltipStyle={{ bottom: '75%' }}> 
                   <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.button}
-                    onPress={() => handleButtonClick('button1')}
+                    onPress={() => handleModeSelection('listenButton')}
                   >
                     <Image
                       source={require('@/assets/images/niveles_texto.png')}
@@ -151,7 +178,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.button}
-                    onPress={() => handleButtonClick('button2')}
+                    onPress={() => handleModeSelection('readButton')}
                   >
                     <Image
                       source={require('@/assets/images/niveles_imagenes.png')}
@@ -169,7 +196,6 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
               >
                 {LEVELS && LEVELS.map((level) => (
                   <View key={level.id} style={styles.levelButtonWrapper}>
-                    {/* Star display above level button */}
                     <View style={styles.levelStarContainer}>
                       <LevelStar 
                         levelId={level.id} 
@@ -185,7 +211,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                       style={styles.levelButton}
                     >
                       <Image
-                        source={buttonClicked && mode === 'read' ? level.image2 : level.image}
+                        source={isModeSelected && mode === 'read' ? level.image2 : level.image}
                         style={styles.levelImage}
                       />
                     </TouchableOpacity>

@@ -158,7 +158,7 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
         </ImageBackground>
 
         <View style={styles.buttonsBackContainer}>
-          <BackButton navigation={navigation} />
+          <BackButton/>
         </View>
 
         <View style={styles.buttonsNextContainer}>
