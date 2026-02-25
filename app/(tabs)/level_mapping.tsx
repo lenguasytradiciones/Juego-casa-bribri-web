@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import {Image} from "expo-image";
 import {
   StyleSheet,
@@ -10,7 +10,7 @@ import {
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationProp, useFocusEffect } from '@react-navigation/native';
 import BackButton from '../misc/BackButton';
 import { LEVELS } from '../misc/constants';
 import StarsProgress from '../screens/StarsProgress';
@@ -26,22 +26,24 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [mode, setMode] = useState<string | null>(null);  // Selected mode
   const [isModeSelected, setIsModeSelected] = useState<boolean>(false);  // Flag of whether mode was selected
 
-  useEffect(() => {
-    const fetchSettings = async () => {
-      try {
-        // Fetch mode and selection status from AsyncStorage
-        const storedMode = await AsyncStorage.getItem('mode');
-        const storedIsModeSelected = await AsyncStorage.getItem('isModeSelected');
-        // Set the state variables
-        setMode(storedMode);
-        setIsModeSelected(storedIsModeSelected === 'true');
-      } catch (error) {
-        console.error('Error loading settings:', error);
-      }
-    };
+  // Ensure settings are fetched every time the screen is loaded
+  useFocusEffect(
+    useCallback(() => {
+      const fetchSettings = async () => {
+        try {
+          const storedMode = await AsyncStorage.getItem('mode');
+          const storedIsModeSelected = await AsyncStorage.getItem('isModeSelected');
+          
+          setMode(storedMode);
+          setIsModeSelected(storedIsModeSelected === 'true');
+        } catch (error) {
+          console.error('Error loading settings:', error);
+        }
+      };
 
-    fetchSettings();
-  }, []);
+      fetchSettings();
+    }, [])
+  )
 
   // Function for handling button clicks to select mode
   const handleModeSelection = async (button: string) => {
