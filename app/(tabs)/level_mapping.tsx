@@ -67,7 +67,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const handleBackPress = async () => {
     // If mode has been selected, deselect to return to mode selection
     if (isModeSelected) {
-      await AsyncStorage.setItem('mode', 'None');
+      await AsyncStorage.removeItem('mode');
       await AsyncStorage.setItem('isModeSelected', 'false');
       setIsModeSelected(false);
       setMode(null);
