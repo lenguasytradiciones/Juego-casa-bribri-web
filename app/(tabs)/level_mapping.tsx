@@ -67,10 +67,14 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const handleBackPress = async () => {
     // If mode has been selected, deselect to return to mode selection
     if (isModeSelected) {
-      await AsyncStorage.removeItem('mode');
-      await AsyncStorage.setItem('isModeSelected', 'false');
-      setIsModeSelected(false);
-      setMode(null);
+      try {
+        await AsyncStorage.removeItem('mode');
+        await AsyncStorage.setItem('isModeSelected', 'false');
+        setIsModeSelected(false);
+        setMode(null);
+      } catch (error) {
+        console.error('Error storing settings:', error);
+      }
     } else {
       navigation.navigate('HomePage');  // Go back to homepage since mode has not been selected
     }
