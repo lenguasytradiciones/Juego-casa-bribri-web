@@ -9,19 +9,15 @@ import {
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storageS/async-storage';
 import { NavigationProp, useFocusEffect } from '@react-navigation/native';
 import BackButton from '../misc/BackButton';
 import { LEVELS } from '../misc/constants';
+import { LevelMode } from '../misc/progress';
 import ModeProgress from '../screens/ModeProgress';
 import LevelStar from '../screens/LevelStar';
 import HoverTooltip from '@/components/HoverTooltip';
 
-// Define LevelMode enum for mode prop
-enum LevelMode {
-  READ = 'read',
-  LISTEN = 'listen'
-}
 const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [mode, setMode] = useState<string | null>(null);  // Selected mode
   const [isModeSelected, setIsModeSelected] = useState<boolean>(false);  // Flag of whether mode was selected
