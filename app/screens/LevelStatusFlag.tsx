@@ -21,28 +21,42 @@ const LevelStatusFlag = ({ levelId, mode }: LevelStatusFlagProps) => {
   }, [levelId, mode]);
 
   return (
-    <View style={styles.container}>
-      {levelCompleted ? (
-        <>
-          <Text style={styles.text}>Completado</Text>
-        </>
-      ) : (
-        <Text style={styles.text}>Pendiente</Text>
-      )}
+    <View style={[styles.badge, levelCompleted ? styles.completedBadge : styles.pendingBadge]}>
+      <Text style={[styles.text, levelCompleted ? styles.completedText : styles.pendingText]}>
+        {levelCompleted ? 'Completado' : 'Pendiente'}
+      </Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    borderRadius: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+  badge: {
+    paddingHorizontal: wp('3%'),
+    paddingVertical: hp('0.5%'),
+    borderRadius: 20,
+    alignSelf: 'flex-start', // Keeps the badge from stretching full width
+    borderWidth: 1,
   },
   text: {
-    fontWeight: 'bold',
-    fontSize: hp('2%'),
-    color: '#444',
+    fontWeight: '700',
+    fontSize: hp('1.8%'),
+    letterSpacing: 0.5,
+  },
+  // Completed Styles (Soft Green)
+  completedBadge: {
+    backgroundColor: '#E8F5E9',
+    borderColor: '#A5D6A7',
+  },
+  completedText: {
+    color: '#2E7D32',
+  },
+  // Pending Styles (Soft Gray)
+  pendingBadge: {
+    backgroundColor: '#F5F5F5',
+    borderColor: '#E0E0E0',
+  },
+  pendingText: {
+    color: '#757575',
   },
 });
 
