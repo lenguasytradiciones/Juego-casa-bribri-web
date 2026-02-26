@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp, useFocusEffect } from '@react-navigation/native';
 import BackButton from '../misc/BackButton';
 import { LEVELS } from '../misc/constants';
-import StarsProgress from '../screens/StarsProgress';
+import ModeProgress from '../screens/ModeProgress';
 import LevelStar from '../screens/LevelStar';
 import HoverTooltip from '@/components/HoverTooltip';
 
@@ -149,9 +149,13 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
             resizeMode={Platform.OS === 'web' ? 'stretch' : 'stretch'}
           />
 
-          <View style={styles.starsProgressContainer}>
-            <StarsProgress showSeparateTypes={true} />
-          </View>
+          {!isModeSelected && <View style={styles.readProgressContainer}>
+            <ModeProgress mode={LevelMode.READ} />
+          </View>}
+
+          {!isModeSelected && <View style={styles.listenProgressContainer}>
+            <ModeProgress mode={LevelMode.LISTEN} />
+          </View>}
 
           {/* Custom Back Button */}
           <BackButton onPress={handleBackPress} />
@@ -295,12 +299,16 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'contain',
   },
-  // Stars progress display
-  starsProgressContainer: {
+  // Mode progress displays
+  readProgressContainer: {
     position: 'absolute',
-    top: hp('5%'),
-    right: wp('5%'),
-    zIndex: 10,
+    top: hp('31%'),
+    left: wp('25.75%'),
+  },
+  listenProgressContainer: {
+    position: 'absolute',
+    top: hp('31%'),
+    right: wp('25.75%'),
   },
 });
 
