@@ -149,6 +149,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
             resizeMode={Platform.OS === 'web' ? 'stretch' : 'stretch'}
           />
 
+          {/* Read and Listen Progress (Shown if no mode is selected) */}
           {!isModeSelected && <View style={styles.readProgressContainer}>
             <ModeProgress mode={LevelMode.READ} />
           </View>}
