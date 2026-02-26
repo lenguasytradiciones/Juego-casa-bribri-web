@@ -31,7 +31,7 @@ const ModeProgress: React.FC<ModeProgressProps> = ({ mode }) => {
           <Image
             source={mode === LevelMode.READ ? require('@/assets/images/star_read.png') : 
                 require('@/assets/images/star_listen.png')}
-            style={styles.progressI}
+            style={styles.progressIcon}
             resizeMode="contain"
           />
           <Text style={styles.starCount}>{completedLevels}/7</Text>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  progressI: {
+  progressIcon: {
     width: wp('5%'),
     height: hp('5%'),
   },
