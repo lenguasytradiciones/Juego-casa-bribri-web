@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storageS/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp, useFocusEffect } from '@react-navigation/native';
 import BackButton from '../misc/BackButton';
 import { LEVELS } from '../misc/constants';
