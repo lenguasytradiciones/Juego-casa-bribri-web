@@ -146,13 +146,17 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
           />
 
           {/* Read and Listen Progress (Shown if no mode is selected) */}
-          {!isModeSelected && <View style={styles.readProgressContainer}>
-            <ModeProgress mode={LevelMode.READ} />
-          </View>}
+          {isModeSelected ? null : (
+            <View style={styles.readProgressContainer}>
+              <ModeProgress mode={LevelMode.READ} />
+            </View>
+          )}
 
-          {!isModeSelected && <View style={styles.listenProgressContainer}>
-            <ModeProgress mode={LevelMode.LISTEN} />
-          </View>}
+          {isModeSelected ? null : (
+            <View style={styles.listenProgressContainer}>
+              <ModeProgress mode={LevelMode.LISTEN} />
+            </View>
+          )}
 
           {/* Custom Back Button */}
           <BackButton onPress={handleBackPress} />
