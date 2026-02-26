@@ -15,7 +15,7 @@ import BackButton from '../misc/BackButton';
 import { LEVELS } from '../misc/constants';
 import { LevelMode } from '../misc/progress';
 import ModeProgress from '../screens/ModeProgress';
-import LevelStar from '../screens/LevelStar';
+import LevelStatusFlag from '../screens/LevelStatusFlag';
 import HoverTooltip from '@/components/HoverTooltip';
 
 const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
@@ -202,14 +202,11 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                 {LEVELS && LEVELS.map((level) => (
                   <View key={level.id} style={styles.levelButtonWrapper}>
                     <View style={styles.levelStarContainer}>
-                      <LevelStar 
+                      <LevelStatusFlag 
                         levelId={level.id} 
                         mode={mode === 'read' ? LevelMode.READ : LevelMode.LISTEN}
-                        size="medium"
-                        showAnimation={true}
                       />
                     </View>
-                    
                     <TouchableOpacity
                       activeOpacity={0.7}
                       onPress={() => handleLevelPress(level.id)}
