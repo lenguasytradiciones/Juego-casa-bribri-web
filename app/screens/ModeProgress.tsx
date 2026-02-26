@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { getLevelProgress, LevelMode } from '../misc/progress';
 
 interface ModeProgressProps {
-  mode: LevelMode;
+  mode: LevelMode;  // Mode to display progress for
 }
 
 // Component that shows the amount of levels completed for a mode
@@ -25,18 +25,18 @@ const ModeProgress: React.FC<ModeProgressProps> = ({ mode }) => {
     }, []);
 
   return (
-  <View style={styles.container}>
-
-        <View style={styles.countContainer}>
-          <View style={styles.flexContainer}>
-            <Image
-              source={mode === LevelMode.READ ? require('@/assets/images/star_read.png') : require('@/assets/images/star_listen.png')}
-              style={styles.progressI}
-              resizeMode="contain"
-            />
-            <Text style={styles.starCount}>{completedLevels}/7</Text>
-          </View>
+    <View style={styles.container}>
+      <View style={styles.countContainer}>
+        <View style={styles.flexContainer}>
+          <Image
+            source={mode === LevelMode.READ ? require('@/assets/images/star_read.png') : 
+                require('@/assets/images/star_listen.png')}
+            style={styles.progressI}
+            resizeMode="contain"
+          />
+          <Text style={styles.starCount}>{completedLevels}/7</Text>
         </View>
+      </View>
     </View>
   );
 };
