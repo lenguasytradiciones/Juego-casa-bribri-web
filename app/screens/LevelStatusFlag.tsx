@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { isLevelCompleted, LevelMode } from '../misc/progress';
 
@@ -11,14 +12,27 @@ interface LevelStatusFlagProps {
 const LevelStatusFlag = ({ levelId, mode }: LevelStatusFlagProps) => {
   const [levelCompleted, setLevelCompleted] = useState<boolean | null>(null);
 
-  useEffect(() => {
-    const fetchProgress = async () => {
-      const levelStatus = await isLevelCompleted(levelId, mode);
-      setLevelCompleted(levelStatus);
-    };
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true;  // Used in case the component is unmounted before obtaining levelStatus
 
-    fetchProgress();
-  }, [levelId, mode]);
+      const fetchProgress = async () => {
+        const levelStatus = await isLevelCompleted(levelId, mode);
+        if (isActive) {
+          setLevelCompleted(levelStatus);
+        }
+      };
+
+      fetchProgress();
+
+      return () => {
+        isActive = false; // Cleanup when the screen loses focus
+      };
+    }, [levelId, mode])
+  );
+
+  // Return a nothing until we know the status
+  if (levelCompleted === null) return null;
 
   return (
     <View style={[styles.badge, levelCompleted ? styles.completedBadge : styles.pendingBadge]}>
