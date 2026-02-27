@@ -298,12 +298,12 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   // Mode progress displays
-  readProgressContainer: {
+  listenProgressContainer: {
     position: 'absolute',
     top: hp('31%'),
     left: wp('25.75%'),
   },
-  listenProgressContainer: {
+  readProgressContainer: {
     position: 'absolute',
     top: hp('31%'),
     right: wp('25.75%'),
