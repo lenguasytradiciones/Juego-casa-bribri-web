@@ -9,7 +9,7 @@ interface LevelStatusFlagProps {
 }
 
 const LevelStatusFlag = ({ levelId, mode }: LevelStatusFlagProps) => {
-  const [levelCompleted, setLevelCompleted] = useState<boolean>(false);
+  const [levelCompleted, setLevelCompleted] = useState<boolean | null>(null);
 
   useEffect(() => {
     const fetchProgress = async () => {
