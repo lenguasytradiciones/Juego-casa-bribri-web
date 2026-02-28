@@ -15,7 +15,7 @@ const Guide1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const bgImage = require('@/assets/images/guia1.png');
   
   // Navigate to level 1
-  const handleNextButtonPress = async () => {
+  const handleNextButtonPress = () => {
     navigation.navigate('Level1');
   };
 
