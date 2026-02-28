@@ -29,7 +29,6 @@ import Guide6Listen from '../levels_listen/6/guide_6_listen';
 import Level6Listen from '../levels_listen/6/level_6_listen';
 import Guide7Listen from '../levels_listen/7/guide_7_listen';
 import Level7Listen from '../levels_listen/7/level_7_listen';
-import ToucanSettings from '../screens/ToucanSettings';
 import HomePage from './homepage';
 import LevelMapping from './level_mapping';
 
@@ -41,11 +40,6 @@ export default function App() {
       <Stack.Screen
         name="HomePage"
         component={HomePage}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ToucanSettings"
-        component={ToucanSettings}
         options={{ headerShown: false }}
       />
       <Stack.Screen
