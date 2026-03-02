@@ -11,7 +11,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import BackButton from '../../misc/BackButton';
 import NextButton from '../../misc/NextButton';
-import { LevelMode } from '../../misc/progress';
+import { completeLevel, LevelMode } from '../../misc/progress';
 import { getResponsivePos } from '../../misc/responsivePosition';
 
 LogBox.ignoreLogs([
@@ -216,9 +216,10 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
         console.log('Visual Objects:', visualObjects);
         console.log('Level Completed:', levelCompleted);
         if (Object.keys(matches).length === visualObjects.length && !levelCompleted) {
-            console.log('All matches made, enabling continue button');
             setCanContinue(true);
             setLevelCompleted(true);
+            // Mark level as completed
+            completeLevel(LEVEL_ID, LEVEL_MODE);
         }
     }, [matches, levelCompleted]);
 
