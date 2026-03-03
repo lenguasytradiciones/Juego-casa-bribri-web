@@ -7,6 +7,7 @@ import {
   TouchableOpacity, 
 } from 'react-native';
 import BackButton from '@/app/misc/BackButton';
+import NextButton from '@/app/misc/NextButton';
 import { READ_GUIDE_INSTRUCTIONS } from '@/app/misc/instructions'
 import InstructionsBanner from '@/app/screens/InstructionsBanner';
 import { NavigationProp } from '@react-navigation/native';
@@ -15,11 +16,6 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const Guide1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const bgImage = require('@/assets/images/guia1.png');
-  
-  // Navigate to level 1
-  const handleNextButtonPress = () => {
-    navigation.navigate('Level1');
-  };
 
   return (
     <SafeAreaProvider>
@@ -44,13 +40,7 @@ const Guide1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
         
         {/* Next Button */}
         <View style={styles.buttonsNextContainer}>
-          {/* Custom Next button that calls our custom handler */}
-          <TouchableOpacity onPress={handleNextButtonPress} style={styles.button}>
-            <Image
-              source={require('@/assets/images/atras.png')}
-              style={styles.adelante}
-            />
-          </TouchableOpacity>
+          <NextButton navigation={navigation} nextName="Level1"/>
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
