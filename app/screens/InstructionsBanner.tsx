@@ -5,10 +5,12 @@ import HoverTooltip from '@/components/HoverTooltip';
 
 const InstructionsBanner = ({ instructions }: { instructions: string }) => {
   return (
+    // HoverTooltip wraps the banner and shows instructions on hover
     <HoverTooltip
       tooltipStyle={styles.tooltipContainer}
       explanation={instructions}
     >
+      {/* Banner Container */}
       <View style={styles.bannerContainer}>
         <Text style={styles.bannerText}>Instrucciones</Text>
       </View>
