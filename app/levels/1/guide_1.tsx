@@ -7,6 +7,8 @@ import {
   TouchableOpacity, 
 } from 'react-native';
 import BackButton from '@/app/misc/BackButton';
+import { READ_GUIDE_INSTRUCTIONS } from '@/app/misc/instructions'
+import InstructionsBanner from '@/app/screens/InstructionsBanner';
 import { NavigationProp } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -33,6 +35,11 @@ const Guide1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
         {/* Back Button */}
         <View style={styles.buttonsBackContainer}>
           <BackButton/>
+        </View>
+
+        {/* Instructions Banner */}
+        <View style={styles.instructionBannerContainer}>
+          <InstructionsBanner instructions={READ_GUIDE_INSTRUCTIONS} />
         </View>
         
         {/* Next Button */}
@@ -66,6 +73,12 @@ const styles = StyleSheet.create({
   buttonsBackContainer: {
     bottom: hp('53%'),
     right: wp('-2%'),
+    zIndex: 5,
+  },
+  instructionBannerContainer: {
+    position: 'absolute',
+    top: hp('10%'),
+    left: wp('2%'),
     zIndex: 5,
   },
   buttonsNextContainer: {
