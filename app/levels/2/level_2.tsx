@@ -19,6 +19,8 @@ import {
 import { NavigationProp } from '@react-navigation/native';
 import BackButton from '../../misc/BackButton';
 import NextButton from '../../misc/NextButton';
+import InstructionsBanner from '@/app/screens/InstructionsBanner';
+import { READ_LEVEL_INSTRUCTIONS } from '@/app/misc/instructions'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { getResponsivePos } from '../../misc/responsivePosition';
@@ -350,6 +352,11 @@ const Level2 = ({ navigation }: { navigation: NavigationProp<any> }) => {
                             <NextButton navigation={navigation} nextName="LevelMapping" />
                         </View>
                     )}
+      
+                     {/* Instructions Banner */}
+                    <View style={styles.instructionBannerContainer}>
+                        <InstructionsBanner instructions={READ_LEVEL_INSTRUCTIONS} />
+                    </View>
 
                     {/* Images - Normal and Selected */}
                     {visualObjects.map((item) => (
@@ -507,6 +514,12 @@ const styles = StyleSheet.create({
         height: hp('5%'),
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    instructionBannerContainer: {
+        position: 'absolute',
+        top: hp('11%'),
+        left: wp('-8%'),
+        zIndex: 999,
     },
 });
 

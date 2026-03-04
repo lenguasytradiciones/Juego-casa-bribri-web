@@ -11,6 +11,8 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import BackButton from '../../misc/BackButton';
 import NextButton from '../../misc/NextButton';
+import InstructionsBanner from '@/app/screens/InstructionsBanner';
+import { READ_LEVEL_INSTRUCTIONS } from '@/app/misc/instructions'
 import { completeLevel, LevelMode } from '../../misc/progress';
 import { getResponsivePos } from '../../misc/responsivePosition';
 
@@ -244,6 +246,11 @@ const Level1 = ({ navigation }: { navigation: NavigationProp<any> }) => {
                         </View>
                     )}
 
+                     {/* Instructions Banner */}
+                    <View style={styles.instructionBannerContainer}>
+                        <InstructionsBanner instructions={READ_LEVEL_INSTRUCTIONS} />
+                    </View>
+
                     {/* Images - Normal and Selected */}
                     {visualObjects.map((item) => (
                         <TouchableOpacity
@@ -431,6 +438,12 @@ const styles = StyleSheet.create({
         width: wp('13%'),
         height: hp('8%'),
         resizeMode: 'contain',
+    },
+    instructionBannerContainer: {
+        position: 'absolute',
+        top: hp('12%'),
+        left: wp('-8%'),
+        zIndex: 999,
     },
 });
 
