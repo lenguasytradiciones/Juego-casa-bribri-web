@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import HoverTooltip from '@/components/HoverTooltip';
 
 const InstructionsBanner = ({ instructions }: { instructions: string }) => {
