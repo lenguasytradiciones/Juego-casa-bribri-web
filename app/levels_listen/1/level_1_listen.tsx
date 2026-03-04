@@ -17,6 +17,8 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import BackButton from '../../misc/BackButton';
 import NextButton from '../../misc/NextButton';
+import InstructionsBanner from '@/app/screens/InstructionsBanner';
+import { LISTEN_LEVEL_INSTRUCTIONS } from '@/app/misc/instructions';
 
 // Audio elements with positions matching the visualObjects from level_1.tsx
 const dropZones = [
@@ -262,6 +264,11 @@ const Level1Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             <BackButton/>
           </View>
 
+          {/* Instructions Banner */}
+          <View style={styles.instructionBannerContainer}>
+              <InstructionsBanner instructions={LISTEN_LEVEL_INSTRUCTIONS} />
+          </View>
+
           {/* Next Button */}
           {canContinue && (
             <View style={styles.buttonsNextContainer}>
@@ -364,6 +371,12 @@ const styles = StyleSheet.create({
     top: hp('-1%'),
     left: wp('-8%'),
     zIndex: 1,
+  },
+  instructionBannerContainer: {
+    position: 'absolute',
+    top: hp('12%'),
+    left: wp('-8%'),
+    zIndex: 5,
   },
   buttonsNextContainer: {
     position: 'absolute',

@@ -6,7 +6,10 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import BackButton from '../../misc/BackButton';
 import NextButton from '../../misc/NextButton';
+import InstructionsBanner from '@/app/screens/InstructionsBanner';
+import { LISTEN_LEVEL_INSTRUCTIONS } from '@/app/misc/instructions';
 import { completeLevel, LevelMode } from '../../misc/progress';
+
 LogBox.ignoreLogs([
   'Draggable: Support for defaultProps will be removed'
 ]);
@@ -347,6 +350,11 @@ const Level2Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
                         <BackButton/>
                     </View>
 
+                    {/* Instructions Banner */}
+                    <View style={styles.instructionBannerContainer}>
+                        <InstructionsBanner instructions={LISTEN_LEVEL_INSTRUCTIONS} />
+                    </View>
+
                     {/* Next Button */}
                     {canContinue && (
                         <View style={styles.buttonsNextContainer}>
@@ -443,9 +451,15 @@ const styles = StyleSheet.create({
     },
     buttonsBackContainer: {
         position: 'absolute',
-        top: hp('-2%'),
+        top: hp('-3%'),
         left: wp('-8%'),
         zIndex: 10,
+    },
+    instructionBannerContainer: {
+        position: 'absolute',
+        top: hp('10%'),
+        left: wp('-8%'),
+        zIndex: 5,
     },
     buttonsNextContainer: {
         position: 'absolute',
