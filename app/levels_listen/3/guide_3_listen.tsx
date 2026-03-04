@@ -63,7 +63,6 @@ const Guide3Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_u_tto', 
             style: {
                 position: 'absolute',
-                left: wp('2.5%'),
                 top: hp('65%'),
                 width: wp('5%'),
                 height: hp('6%'),
@@ -80,7 +79,7 @@ const Guide3Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_uko', 
             style: {
                 position: 'absolute',
-                left: wp('68.5%'),
+                left: wp('71%'),
                 top: hp('45.5%'),
                 width: wp('5%'),
                 height: hp('6%'),

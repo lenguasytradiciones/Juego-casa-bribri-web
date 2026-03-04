@@ -43,8 +43,8 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_tso_klowok', 
             style: {
                 position: 'absolute',
-                left: wp('7.5%'),
-                top: hp('53%'),
+                left: wp('4%'),
+                top: hp('54%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
@@ -77,7 +77,7 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_tso', 
             style: {
                 position: 'absolute',
-                left: wp('51%'),
+                left: wp('52%'),
                 top: hp('3%'),
                 width: wp('5%'),
                 height: hp('6%'),
@@ -111,7 +111,7 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_nak_kata', 
             style: {
                 position: 'absolute',
-                left: wp('71.5%'),
+                left: wp('74%'),
                 top: hp('7%'),
                 width: wp('5%'),
                 height: hp('6%'),
@@ -162,7 +162,6 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_i_kule', 
             style: {
                 position: 'absolute',
-                left: wp('3%'),
                 top: hp('34%'),
                 width: wp('5%'),
                 height: hp('6%'),
@@ -179,7 +178,7 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_chamulikata', 
             style: {
                 position: 'absolute',
-                left: wp('8.5%'),
+                left: wp('6%'),
                 top: hp('15%'),
                 width: wp('5%'),
                 height: hp('6%'),

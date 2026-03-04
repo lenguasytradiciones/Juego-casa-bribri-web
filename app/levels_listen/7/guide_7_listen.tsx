@@ -220,7 +220,7 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_tcho_tka', 
             style: {
                 position: 'absolute', 
-                left: wp('67%'),
+                left: wp('69%'),
                 top: hp('27%'),
                 width: wp('5%'),
                 height: hp('5%'),
