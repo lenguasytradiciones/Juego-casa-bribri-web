@@ -20,7 +20,7 @@ const InstructionsBanner = ({ instructions }: { instructions: string }) => {
 
 const styles = StyleSheet.create({
   tooltipContainer: {
-    top: hp('8%'),
+    top: hp('6%'),
     left: 0,
     width: 450,
   },
