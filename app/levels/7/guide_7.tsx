@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
 import { ImageBackground, Platform, StyleSheet, View } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp } from '@react-navigation/native';
 import BackButton from '@/app/misc/BackButton';
 import NextButton from '@/app/misc/NextButton';
@@ -11,16 +9,6 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const Guide = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const bgImage = require('@/assets/images/guia7.png');
-
-  const [mode, setMode] = useState<'read' | 'listen' | null>(null);
-
-  useEffect(() => {
-      const fetchMode = async () => {
-          const storedMode = await AsyncStorage.getItem('mode');
-          setMode(storedMode === 'read' || storedMode === 'listen' ? storedMode : 'listen');
-      };
-      fetchMode();
-  }, []);
 
   return (
     <SafeAreaProvider>

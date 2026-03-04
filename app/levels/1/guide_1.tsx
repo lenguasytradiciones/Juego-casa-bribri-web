@@ -1,10 +1,8 @@
-import React from 'react';
 import {Image} from "expo-image";
 import { 
   ImageBackground, 
   StyleSheet, 
   View, 
-  TouchableOpacity, 
 } from 'react-native';
 import BackButton from '@/app/misc/BackButton';
 import NextButton from '@/app/misc/NextButton';

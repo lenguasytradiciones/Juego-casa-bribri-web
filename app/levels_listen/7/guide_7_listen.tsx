@@ -1,7 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp } from '@react-navigation/native';
 import { Audio } from 'expo-av';
-import React, { useEffect, useState } from 'react';
 import BackButton from '@/app/misc/BackButton';
 import NextButton from '@/app/misc/NextButton';
 import InstructionsBanner from '@/app/screens/InstructionsBanner';
@@ -12,16 +10,6 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const bgImage = require('@/assets/images/guia7.png');
-
-    const [mode, setMode] = useState<'read' | 'listen' | null>(null);
-
-    useEffect(() => {
-        const fetchMode = async () => {
-            const storedMode = await AsyncStorage.getItem('mode');
-            setMode(storedMode === 'read' || storedMode === 'listen' ? storedMode : 'listen');
-        };
-        fetchMode();
-    }, []);
 
     // Audio elements for the listen mode, based on level_7 visualObjects
     const draggableElements = [

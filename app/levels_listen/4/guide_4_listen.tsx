@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
 import { ImageBackground, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import BackButton from '@/app/misc/BackButton';
 import NextButton from '@/app/misc/NextButton';
 import InstructionsBanner from '@/app/screens/InstructionsBanner';
@@ -12,16 +10,6 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const Guide4Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const bgImage = require('@/assets/images/guia4.png');
-
-    const [mode, setMode] = useState<'read' | 'listen' | null>(null);
-
-    useEffect(() => {
-        const fetchMode = async () => {
-            const storedMode = await AsyncStorage.getItem('mode');
-            setMode(storedMode === 'read' || storedMode === 'listen' ? storedMode : 'listen');
-        };
-        fetchMode();
-    }, []);
 
     // Audio elements for the listen mode, based on level_4 visualObjects
     const draggableElements = [
