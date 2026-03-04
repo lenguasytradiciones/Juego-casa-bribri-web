@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   tooltipContainer: {
     top: hp('6%'),
     left: 0,
+    bottom: undefined,
     width: 450,
   },
   bannerContainer: {
