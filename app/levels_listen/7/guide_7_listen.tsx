@@ -1,25 +1,15 @@
-import BackButton from '@/app/misc/BackButton';
-import NextButton from '@/app/misc/NextButton';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp } from '@react-navigation/native';
 import { Audio } from 'expo-av';
-import React, { useEffect, useState } from 'react';
+import BackButton from '@/app/misc/BackButton';
+import NextButton from '@/app/misc/NextButton';
+import InstructionsBanner from '@/app/screens/InstructionsBanner';
+import { LISTEN_GUIDE_INSTRUCTIONS } from '@/app/misc/instructions';
 import { Image, ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const bgImage = require('@/assets/images/guia7.png');
-
-    const [mode, setMode] = useState<'read' | 'listen' | null>(null);
-
-    useEffect(() => {
-        const fetchMode = async () => {
-            const storedMode = await AsyncStorage.getItem('mode');
-            setMode(storedMode === 'read' || storedMode === 'listen' ? storedMode : 'listen');
-        };
-        fetchMode();
-    }, []);
 
     // Audio elements for the listen mode, based on level_7 visualObjects
     const draggableElements = [
@@ -218,7 +208,7 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_tcho_tka', 
             style: {
                 position: 'absolute', 
-                left: wp('67%'),
+                left: wp('69%'),
                 top: hp('27%'),
                 width: wp('5%'),
                 height: hp('5%'),
@@ -280,11 +270,17 @@ const Guide7Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
                             <Image source={require('@/assets/images/audio.png')} style={styles.audioIcon} />
                         </TouchableOpacity>
                     ))}
-
+                    {/* Back Button */}
                     <View style={styles.buttonsBackContainer}>
                         <BackButton/>
                     </View>
-                    
+
+                    {/* Instructions Banner */}
+                    <View style={styles.instructionBannerContainer}>
+                        <InstructionsBanner instructions={LISTEN_GUIDE_INSTRUCTIONS} />
+                    </View>
+
+                    {/* Next Button */}
                     <View style={styles.buttonsNextContainer}>
                         <NextButton navigation={navigation} nextName="Level7Listen" />
                     </View>
@@ -321,7 +317,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: hp('-1%'),
         right: wp('-6%'),
-    }
+    },
+    instructionBannerContainer: {
+        position: 'absolute',
+        top: hp('10%'),
+        left: wp('-8%'),
+        zIndex: 5,
+    },
 });
 
 export default Guide7Listen;

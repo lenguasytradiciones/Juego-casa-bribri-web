@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
 import { ImageBackground, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import BackButton from '@/app/misc/BackButton';
 import NextButton from '@/app/misc/NextButton';
+import InstructionsBanner from '@/app/screens/InstructionsBanner';
+import { LISTEN_GUIDE_INSTRUCTIONS } from '@/app/misc/instructions';
 import { NavigationProp } from '@react-navigation/native';
 import { Audio } from 'expo-av';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -10,16 +10,6 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const bgImage = require('@/assets/images/guia2.png');
-
-    const [mode, setMode] = useState<'read' | 'listen' | null>(null);
-
-    useEffect(() => {
-        const fetchMode = async () => {
-            const storedMode = await AsyncStorage.getItem('mode');
-            setMode(storedMode === 'read' || storedMode === 'listen' ? storedMode : 'listen');
-        };
-        fetchMode();
-    }, []);
 
     // Draggable elements now hold only audio information.
     const draggableElements = [
@@ -41,8 +31,8 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_tso_klowok', 
             style: {
                 position: 'absolute',
-                left: wp('7.5%'),
-                top: hp('53%'),
+                left: wp('4%'),
+                top: hp('54%'),
                 width: wp('5%'),
                 height: hp('6%'),
                 borderWidth: 3,
@@ -75,7 +65,7 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_tso', 
             style: {
                 position: 'absolute',
-                left: wp('51%'),
+                left: wp('52%'),
                 top: hp('3%'),
                 width: wp('5%'),
                 height: hp('6%'),
@@ -109,7 +99,7 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_nak_kata', 
             style: {
                 position: 'absolute',
-                left: wp('71.5%'),
+                left: wp('74%'),
                 top: hp('7%'),
                 width: wp('5%'),
                 height: hp('6%'),
@@ -160,7 +150,6 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_i_kule', 
             style: {
                 position: 'absolute',
-                left: wp('3%'),
                 top: hp('34%'),
                 width: wp('5%'),
                 height: hp('6%'),
@@ -177,7 +166,7 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             name: 'obj_chamulikata', 
             style: {
                 position: 'absolute',
-                left: wp('8.5%'),
+                left: wp('6%'),
                 top: hp('15%'),
                 width: wp('5%'),
                 height: hp('6%'),
@@ -223,10 +212,17 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
                         </TouchableOpacity>
                     ))}
 
+                    {/* Back Button */}
                     <View style={styles.buttonsBackContainer}>
                         <BackButton/>
                     </View>
-                    
+
+                    {/* Instructions Banner */}
+                    <View style={styles.instructionBannerContainer}>
+                        <InstructionsBanner instructions={LISTEN_GUIDE_INSTRUCTIONS} />
+                    </View>
+
+                    {/* Next Button */}
                     <View style={styles.buttonsNextContainer}>
                         <NextButton navigation={navigation} nextName="Level2Listen" />
                     </View>
@@ -258,6 +254,12 @@ const styles = StyleSheet.create({
         top: hp('-3%'),
         left: wp('-8%'),
         resizeMode: 'cover',
+    },
+    instructionBannerContainer: {
+        position: 'absolute',
+        top: hp('10%'),
+        left: wp('-8%'),
+        zIndex: 5,
     },
     buttonsNextContainer: {
         position: 'absolute',

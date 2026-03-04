@@ -1,25 +1,15 @@
-import BackButton from '@/app/misc/BackButton';
-import NextButton from '@/app/misc/NextButton';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp } from '@react-navigation/native';
 import { Audio } from 'expo-av';
-import React, { useEffect, useState } from 'react';
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import BackButton from '@/app/misc/BackButton';
+import NextButton from '@/app/misc/NextButton';
+import InstructionsBanner from '@/app/screens/InstructionsBanner';
+import { LISTEN_GUIDE_INSTRUCTIONS } from '@/app/misc/instructions';
+import { Image, ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const bgImage = require('@/assets/images/guia1.png');
-
-  const [mode, setMode] = useState<'read' | 'listen' | null>(null);
-
-  useEffect(() => {
-    const fetchMode = async () => {
-      const storedMode = await AsyncStorage.getItem('mode');
-      setMode(storedMode === 'read' || storedMode === 'listen' ? storedMode : 'listen');
-    };
-    fetchMode();
-  }, []);
 
   // Draggable elements are used here only to retrieve the audio files.
   const draggableElements = [
@@ -157,10 +147,17 @@ const GuideListen = ({ navigation }: { navigation: NavigationProp<any> }) => {
           ))}
         </ImageBackground>
 
+        {/* Back Button */}
         <View style={styles.buttonsBackContainer}>
           <BackButton/>
         </View>
 
+        {/* Instructions Banner */}
+        <View style={styles.instructionBannerContainer}>
+          <InstructionsBanner instructions={LISTEN_GUIDE_INSTRUCTIONS} />
+        </View>
+
+        {/* Next Button */}
         <View style={styles.buttonsNextContainer}>
           <NextButton navigation={navigation} nextName="Level1Listen" />
         </View>
@@ -191,6 +188,12 @@ const styles = StyleSheet.create({
   buttonsBackContainer: {
     bottom: hp('53%'),
     right: wp('-2%'),
+    zIndex: 5,
+  },
+  instructionBannerContainer: {
+    position: 'absolute',
+    top: hp('10%'),
+    left: wp('2%'),
     zIndex: 5,
   },
   buttonsNextContainer: {

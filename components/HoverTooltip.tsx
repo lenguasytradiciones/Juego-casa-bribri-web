@@ -7,10 +7,11 @@ interface HoverTooltipProps {
   explanation: string;      // The text to display
   containerStyle?: ViewStyle; // Optional custom styling for the wrapper
   tooltipStyle?: ViewStyle; // Optional custom styling for the tooltip
+  bubbleStyle?: ViewStyle;  // Optional custom styling for the bubble
 }
 
 // Custom Tooltip Component. Usage: Wrap around components and specify explanation
-const HoverTooltip: React.FC<HoverTooltipProps> = ({ children, explanation, containerStyle, tooltipStyle }) => {
+const HoverTooltip: React.FC<HoverTooltipProps> = ({ children, explanation, containerStyle, tooltipStyle, bubbleStyle }) => {
   const [visible, setVisible] = useState<boolean>(false);
 
   return (
@@ -18,7 +19,7 @@ const HoverTooltip: React.FC<HoverTooltipProps> = ({ children, explanation, cont
       {/* Tooltip */}
       {visible && ( // pointerEvents set to none to avoid flickering
         <View style={[styles.tooltipContainer, tooltipStyle]} pointerEvents="none">
-          <View style={styles.bubble}>
+          <View style={[styles.bubble, bubbleStyle]}>
             <Text style={styles.tooltipText}>{explanation}</Text>
           </View>
         </View>
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     fontWeight: '600',
     textAlign: 'center',
+    letterSpacing: 0.5,
   },
 });
 
