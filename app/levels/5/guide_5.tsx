@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import BackButton from '@/app/misc/BackButton';
 import NextButton from '@/app/misc/NextButton';
 import { READ_GUIDE_INSTRUCTIONS } from '@/app/misc/instructions'

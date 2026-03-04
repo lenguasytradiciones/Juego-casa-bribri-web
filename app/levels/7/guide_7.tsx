@@ -1,4 +1,4 @@
-import { ImageBackground, Platform, StyleSheet, View } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import BackButton from '@/app/misc/BackButton';
 import NextButton from '@/app/misc/NextButton';

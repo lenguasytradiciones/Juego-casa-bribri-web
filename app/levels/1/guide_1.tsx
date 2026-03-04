@@ -1,4 +1,3 @@
-import {Image} from "expo-image";
 import { 
   ImageBackground, 
   StyleSheet, 

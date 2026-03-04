@@ -4,7 +4,7 @@ import BackButton from '@/app/misc/BackButton';
 import NextButton from '@/app/misc/NextButton';
 import InstructionsBanner from '@/app/screens/InstructionsBanner';
 import { LISTEN_GUIDE_INSTRUCTIONS } from '@/app/misc/instructions';
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
