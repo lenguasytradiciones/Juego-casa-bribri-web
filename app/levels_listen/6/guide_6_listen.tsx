@@ -3,6 +3,8 @@ import { ImageBackground, StyleSheet, View, TouchableOpacity, Image } from 'reac
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BackButton from '@/app/misc/BackButton';
 import NextButton from '@/app/misc/NextButton';
+import InstructionsBanner from '@/app/screens/InstructionsBanner';
+import { LISTEN_GUIDE_INSTRUCTIONS } from '@/app/misc/instructions';
 import { NavigationProp } from '@react-navigation/native';
 import { Audio } from 'expo-av';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -214,11 +216,17 @@ const Guide6Listen = ({ navigation }: { navigation: NavigationProp<any> }) => {
                             <Image source={require('@/assets/images/audio.png')} style={styles.audioIcon} />
                         </TouchableOpacity>
                     ))}
-
+                    {/* Back Button */}
                     <View style={styles.buttonsBackContainer}>
                         <BackButton/>
                     </View>
-                    
+
+                    {/* Instructions Banner */}
+                    <View style={styles.instructionBannerContainer}>
+                        <InstructionsBanner instructions={LISTEN_GUIDE_INSTRUCTIONS} />
+                    </View>
+
+                    {/* Next Button */}
                     <View style={styles.buttonsNextContainer}>
                         <NextButton navigation={navigation} nextName="Level6Listen" />
                     </View>
@@ -250,6 +258,12 @@ const styles = StyleSheet.create({
         top: hp('-3%'),
         left: wp('-8%'),
         resizeMode: 'cover',
+    },
+    instructionBannerContainer: {
+        position: 'absolute',
+        top: hp('10%'),
+        left: wp('-8%'),
+        zIndex: 5,
     },
     buttonsNextContainer: {
         position: 'absolute',
