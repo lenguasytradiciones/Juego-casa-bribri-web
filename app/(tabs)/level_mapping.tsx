@@ -190,13 +190,13 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
           {/* Read and Listen Progress (Shown if no mode is selected) */}
           {isModeSelected ? null : (
             <View style={styles.readProgressContainer}>
-              <ModeProgress mode={LevelMode.READ} />
+              <ModeProgress mode={LevelMode.READ} completedLevels={progress?.readLevels.length}/>
             </View>
           )}
 
           {isModeSelected ? null : (
             <View style={styles.listenProgressContainer}>
-              <ModeProgress mode={LevelMode.LISTEN} />
+              <ModeProgress mode={LevelMode.LISTEN} completedLevels={progress?.listenLevels.length} />
             </View>
           )}
 
