@@ -10,25 +10,23 @@ import {
   Easing
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { LevelMode } from '../misc/progress';
+import { resetProgress } from '../misc/progress';
 
 interface RestartModalProps {
   visible: boolean;
   onClose: () => void;
-  onNextLevel?: () => void;
 }
 
 const RestartModal: React.FC<RestartModalProps> = ({
   visible,
   onClose,
-  onNextLevel
 }) => {
   // Animation refs
   const scaleAnim = useRef(new Animated.Value(0.5)).current;
   const rotateAnim = useRef(new Animated.Value(0)).current;
   const opacityAnim = useRef(new Animated.Value(0)).current;
   
-  // Play celebratory sound when modal appears
+  // Determines if animations should run when modal becomes visible
   useEffect(() => {
     if (visible) {
       startAnimations();
@@ -57,7 +55,7 @@ const RestartModal: React.FC<RestartModalProps> = ({
           useNativeDriver: true,
         })
       ]),
-      // Then rotate star
+      // Rotate item
       Animated.timing(rotateAnim, {
         toValue: 2, // 2 full rotations (720 degrees)
         duration: 1000,
@@ -73,6 +71,12 @@ const RestartModal: React.FC<RestartModalProps> = ({
     outputRange: ['0deg', '720deg']
   });
   
+  // Handler for resetting progress and closing modal
+  const handleRestart = async () => {
+    await resetProgress();
+    onClose();
+  };
+
   return (
     <Modal
       transparent={true}
@@ -93,31 +97,25 @@ const RestartModal: React.FC<RestartModalProps> = ({
           ]}
         >
           <Text style={styles.congratsText}>¡Felicidades!</Text>
-{/*           
+          <Text style={styles.descriptionText}>Ha completado todos los niveles</Text>
+
           <Animated.View style={{
             transform: [{ rotate: rotation }]
           }}>
             <Image
-              source={require('../assets/star.png')}
-              style={styles.starImage}
+              source={require('@/assets/images/u.png')}
+              style={styles.itemImage}
               resizeMode="contain"
             />
-          </Animated.View> */}
+          </Animated.View>
           
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity 
-              style={[styles.button, styles.menuButton]} 
-              onPress={onClose}
-            >
-              <Text style={styles.buttonText}>Menú</Text>
-            </TouchableOpacity>
-            
-            {onNextLevel && (
+          <View style={styles.buttonsContainer}>        
+            {(
               <TouchableOpacity 
-                style={[styles.button, styles.nextButton]} 
-                onPress={onNextLevel}
+                style={[styles.button, styles.restartButton]} 
+                onPress={handleRestart}
               >
-                <Text style={styles.buttonText}>Siguiente Nivel</Text>
+                <Text style={styles.buttonText}>Reiniciar Progreso</Text>
               </TouchableOpacity>
             )}
           </View>
@@ -149,13 +147,13 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 10,
   },
-  levelText: {
-    fontSize: hp('2.5%'),
+  descriptionText: {
+    fontSize: hp('2%'),
     color: '#555',
     marginBottom: 20,
     textAlign: 'center',
   },
-  starImage: {
+  itemImage: {
     width: wp('20%'),
     height: hp('20%'),
     marginBottom: 20,
@@ -172,10 +170,7 @@ const styles = StyleSheet.create({
     minWidth: wp('15%'),
     alignItems: 'center',
   },
-  menuButton: {
-    backgroundColor: '#888',
-  },
-  nextButton: {
+  restartButton: {
     backgroundColor: '#4CAF50',
   },
   buttonText: {
