@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import {Image} from "expo-image";
 import {
   StyleSheet,
@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp, useFocusEffect } from '@react-navigation/native';
 import BackButton from '../misc/BackButton';
 import { LEVELS } from '../misc/constants';
-import { LevelMode } from '../misc/progress';
+import { LevelMode, LevelProgress, getLevelProgress } from '../misc/progress';
 import ModeProgress from '../screens/ModeProgress';
 import LevelStatusFlag from '../screens/LevelStatusFlag';
 import HoverTooltip from '@/components/HoverTooltip';
@@ -21,6 +21,7 @@ import HoverTooltip from '@/components/HoverTooltip';
 const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [mode, setMode] = useState<string | null>(null);  // Selected mode
   const [isModeSelected, setIsModeSelected] = useState<boolean>(false);  // Flag of whether mode was selected
+  const [progress, setProgress] = useState<LevelProgress | null>(null);
 
   // Ensure settings are fetched every time the screen is loaded
   useFocusEffect(
@@ -32,6 +33,9 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
           
           setMode(storedMode);
           setIsModeSelected(storedIsModeSelected === 'true');
+
+          const updatedProgress = await getLevelProgress();
+          setProgress(updatedProgress);
         } catch (error) {
           console.error('Error loading settings:', error);
         }
@@ -135,6 +139,17 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
     }
   };
 
+  // Function to check if a level is completed using the fetched progress
+  const isLevelCompleted = (levelId: number, mode: LevelMode): boolean => {
+    if (progress === null) return false; // If progress hasn't loaded yet, treat as not completed
+  
+    // Check if the levelID is in the appropriate list based on mode
+    // If it is recorded, it has been completed.
+    return mode === LevelMode.READ 
+      ? progress.readLevels.includes(levelId)
+      : progress.listenLevels.includes(levelId);
+  };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.safeArea}>
@@ -203,8 +218,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   <View key={level.id} style={styles.levelButtonWrapper}>
                     <View style={styles.levelStarContainer}>
                       <LevelStatusFlag 
-                        levelId={level.id} 
-                        mode={mode === 'read' ? LevelMode.READ : LevelMode.LISTEN}
+                        isLevelCompleted={isLevelCompleted(level.id, mode as LevelMode)}
                       />
                     </View>
                     <TouchableOpacity
