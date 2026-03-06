@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import {Image} from "expo-image";
 import {
   StyleSheet,
@@ -13,31 +13,56 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp, useFocusEffect } from '@react-navigation/native';
 import BackButton from '../misc/BackButton';
 import { LEVELS } from '../misc/constants';
-import { LevelMode } from '../misc/progress';
+import { LevelMode, LevelProgress, getLevelProgress } from '../misc/progress';
 import ModeProgress from '../screens/ModeProgress';
 import LevelStatusFlag from '../screens/LevelStatusFlag';
 import HoverTooltip from '@/components/HoverTooltip';
+import RestartModal from '../screens/RestartModal';
 
 const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [mode, setMode] = useState<string | null>(null);  // Selected mode
   const [isModeSelected, setIsModeSelected] = useState<boolean>(false);  // Flag of whether mode was selected
+  const [progress, setProgress] = useState<LevelProgress | null>(null);
+  const [showRestartModal, setShowRestartModal] = useState<boolean>(false);
 
-  // Ensure settings are fetched every time the screen is loaded
+  // Fetch mode from AsyncStorage to show correct levels
+  const fetchSettings = async () => {
+    try {
+      const storedMode = await AsyncStorage.getItem('mode');
+      const storedIsModeSelected = await AsyncStorage.getItem('isModeSelected');
+      
+      setMode(storedMode);
+      setIsModeSelected(storedIsModeSelected === 'true');
+    } catch (error) {
+      console.error('Error loading settings:', error);
+    }
+  };
+
+  // Fetch progress from AsyncStorage to show correct level completion status
+  const checkProgress = async () => {
+    try {
+      const updatedProgress = await getLevelProgress();
+      setProgress(updatedProgress);
+
+      // If all levels are completed in both modes, show restart modal
+      if (updatedProgress.readLevels.length === LEVELS.length &&
+         updatedProgress.listenLevels.length === LEVELS.length
+      ) {
+        setShowRestartModal(true);
+      }
+    } catch (error) {
+      console.error('Error loading progress:', error);
+    }
+  };
+
+  // Load settings and progress when screen is focused
   useFocusEffect(
     useCallback(() => {
-      const fetchSettings = async () => {
-        try {
-          const storedMode = await AsyncStorage.getItem('mode');
-          const storedIsModeSelected = await AsyncStorage.getItem('isModeSelected');
-          
-          setMode(storedMode);
-          setIsModeSelected(storedIsModeSelected === 'true');
-        } catch (error) {
-          console.error('Error loading settings:', error);
-        }
+      const load = async () => {
+        await fetchSettings();
+        await checkProgress();
       };
-
-      fetchSettings();
+      load();
     }, [])
   )
 
@@ -135,6 +160,23 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
     }
   };
 
+  // Function to check if a level is completed using the fetched progress
+  const isLevelCompleted = (levelId: number, mode: LevelMode): boolean => {
+    if (progress === null) return false; // If progress hasn't loaded yet, treat as not completed
+  
+    // Check if the levelID is in the appropriate list based on mode
+    // If it is recorded, it has been completed.
+    return mode === LevelMode.READ 
+      ? progress.readLevels.includes(levelId)
+      : progress.listenLevels.includes(levelId);
+  };
+
+  // Function to handle restart after all levels are completed
+  const handleRestart = async () => {
+    await checkProgress();
+    setShowRestartModal(false);
+  };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.safeArea}>
@@ -148,18 +190,20 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
           {/* Read and Listen Progress (Shown if no mode is selected) */}
           {isModeSelected ? null : (
             <View style={styles.readProgressContainer}>
-              <ModeProgress mode={LevelMode.READ} />
+              <ModeProgress mode={LevelMode.READ} completedLevels={progress?.readLevels.length}/>
             </View>
           )}
 
           {isModeSelected ? null : (
             <View style={styles.listenProgressContainer}>
-              <ModeProgress mode={LevelMode.LISTEN} />
+              <ModeProgress mode={LevelMode.LISTEN} completedLevels={progress?.listenLevels.length} />
             </View>
           )}
 
           {/* Custom Back Button */}
           <BackButton onPress={handleBackPress} />
+
+          <RestartModal visible={showRestartModal} onClose={handleRestart} />
 
           {/* Main Content */}
           <View style={styles.content}>
@@ -203,8 +247,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   <View key={level.id} style={styles.levelButtonWrapper}>
                     <View style={styles.levelStarContainer}>
                       <LevelStatusFlag 
-                        levelId={level.id} 
-                        mode={mode === 'read' ? LevelMode.READ : LevelMode.LISTEN}
+                        isLevelCompleted={isLevelCompleted(level.id, mode as LevelMode)}
                       />
                     </View>
                     <TouchableOpacity

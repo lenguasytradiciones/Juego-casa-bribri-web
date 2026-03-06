@@ -1,43 +1,15 @@
-import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { isLevelCompleted, LevelMode } from '../misc/progress';
 
 interface LevelStatusFlagProps {
-  levelId: number;  // Level ID for looking up completion status
-  mode: LevelMode;  // Mode (READ or LISTEN) for fetching progress
+  isLevelCompleted: boolean;
 }
 
-const LevelStatusFlag = ({ levelId, mode }: LevelStatusFlagProps) => {
-  const [levelCompleted, setLevelCompleted] = useState<boolean | null>(null);
-
-  useFocusEffect(
-    useCallback(() => {
-      let isActive = true;  // Used in case the component is unmounted before obtaining levelStatus
-
-      const fetchProgress = async () => {
-        const levelStatus = await isLevelCompleted(levelId, mode);
-        if (isActive) {
-          setLevelCompleted(levelStatus);
-        }
-      };
-
-      fetchProgress();
-
-      return () => {
-        isActive = false; // Cleanup when the screen loses focus
-      };
-    }, [levelId, mode])
-  );
-
-  // Return a nothing until we know the status
-  if (levelCompleted === null) return null;
-
+const LevelStatusFlag = ({ isLevelCompleted}: LevelStatusFlagProps) => {
   return (
-    <View style={[styles.badge, levelCompleted ? styles.completedBadge : styles.pendingBadge]}>
-      <Text style={[styles.text, levelCompleted ? styles.completedText : styles.pendingText]}>
-        {levelCompleted ? 'Completado' : 'Pendiente'}
+    <View style={[styles.badge, isLevelCompleted ? styles.completedBadge : styles.pendingBadge]}>
+      <Text style={[styles.text, isLevelCompleted ? styles.completedText : styles.pendingText]}>
+        {isLevelCompleted ? 'Completado' : 'Pendiente'}
       </Text>
     </View>
   );
