@@ -1,8 +1,5 @@
-import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { isLevelCompleted, LevelMode } from '../misc/progress';
 
 interface LevelStatusFlagProps {
   isLevelCompleted: boolean;
