@@ -8,7 +8,7 @@ interface ModeProgressProps {
 }
 
 // Component that shows the amount of levels completed for a mode
-const ModeProgress: React.FC<ModeProgressProps> = ({ mode, completedLevels }) => {
+const ModeProgress: React.FC<ModeProgressProps> = ({ mode, completedLevels = 0 }) => {
   return (
     <View style={styles.container}>
       <View style={styles.countContainer}>
