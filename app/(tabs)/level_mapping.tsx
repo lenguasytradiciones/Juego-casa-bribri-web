@@ -173,7 +173,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
 
   // Function to handle restart after all levels are completed
   const handleRestart = async () => {
-    checkProgress();
+    await checkProgress();
     setShowRestartModal(false);
   };
 
