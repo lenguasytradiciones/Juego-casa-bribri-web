@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     top: hp('6%'),
     left: 0,
     bottom: undefined,
-    width: 450,
+    width: 150,
   },
   bannerContainer: {
     backgroundColor: '#FFFFFF',
