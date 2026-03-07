@@ -209,7 +209,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
           <View style={styles.content}>
             {!isModeSelected ? (
               <View style={styles.buttonContainer}>
-                <HoverTooltip explanation="Asociar audio con imagen" tooltipStyle={{ bottom: '75%' }}> 
+                <HoverTooltip explanation="Asociar audio con imagen" tooltipStyle={{ bottom: '75%', width: wp('30%') }}> 
                   <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.button}
