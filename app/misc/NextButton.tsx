@@ -42,14 +42,6 @@ const styles = StyleSheet.create({
         right: 10,
         zIndex: 1,
     },
-    buttonImageBottom: {
-        width: '95%',
-        height: 110,
-        position: 'absolute',
-        bottom: -34,
-        right: 70,
-        resizeMode: 'stretch',
-    },
     buttonLabelContainer: {
         position: 'absolute',
         right: 80,
