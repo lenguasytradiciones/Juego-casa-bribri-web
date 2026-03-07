@@ -281,7 +281,7 @@ const Level3 = ({ navigation }: { navigation: NavigationProp<any> }) => {
                 
                 {canContinue && (
                         <View style={styles.buttonsNextContainer}>
-                            <NextButton navigation={navigation} nextName="LevelMapping" />
+                            <NextButton navigation={navigation} nextName="LevelMapping" showLabel={true} />
                         </View>
                     )}
                 
