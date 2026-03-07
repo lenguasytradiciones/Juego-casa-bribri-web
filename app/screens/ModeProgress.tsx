@@ -13,12 +13,6 @@ const ModeProgress: React.FC<ModeProgressProps> = ({ mode, completedLevels = 0 }
     <View style={styles.container}>
       <View style={styles.countContainer}>
         <View style={styles.flexContainer}>
-          <Image
-            source={mode === LevelMode.READ ? require('@/assets/images/star_read.png') : 
-                require('@/assets/images/star_listen.png')}
-            style={styles.progressIcon}
-            resizeMode="contain"
-          />
           <Text style={styles.starCount}>{completedLevels}/7</Text>
         </View>
       </View>
@@ -41,10 +35,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  progressIcon: {
-    width: wp('5%'),
-    height: hp('5%'),
   },
   starCount: {
     marginLeft: 5,
