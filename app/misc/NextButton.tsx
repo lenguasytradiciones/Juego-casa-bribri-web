@@ -1,13 +1,14 @@
 import React from 'react';
-import { TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Image, Text, StyleSheet } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 
 interface NextButtonProps {
     navigation: NavigationProp<any>;
     nextName: string;
+    showLabel?: boolean;
 }
 
-const NextButton: React.FC<NextButtonProps> = ({ navigation, nextName }) => {
+const NextButton: React.FC<NextButtonProps> = ({ navigation, nextName, showLabel = false }) => {
     const handleContinue = () => {
         navigation.navigate(nextName);
     }
@@ -15,13 +16,14 @@ const NextButton: React.FC<NextButtonProps> = ({ navigation, nextName }) => {
     return (
         <TouchableOpacity style={styles.button} onPress={handleContinue}>
             <Image
-                // source={require('@/assets/images/button.png')}
-                // style={styles.buttonImageBottom}
-            />
-            <Image
                 source={require('@/assets/images/atras.png')}
                 style={styles.adelante}
             />
+            {showLabel && (
+                <View style={styles.buttonLabelContainer}>
+                    <Text style={styles.buttonLabel}>Continuar</Text>
+                </View>
+            )}
         </TouchableOpacity>
     );
 };
@@ -39,13 +41,16 @@ const styles = StyleSheet.create({
         right: 10,
         zIndex: 1,
     },
-    buttonImageBottom: {
-        width: '95%',
-        height: 110,
+    buttonLabelContainer: {
         position: 'absolute',
-        bottom: -34,
-        right: 1,
-        resizeMode: 'stretch',
+        right: 80,
+        top: 1,
+    },
+    buttonLabel: {
+        color: '#FF8C00',
+        fontSize: 30,
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
 });
 
