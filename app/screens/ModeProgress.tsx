@@ -13,7 +13,7 @@ const ModeProgress: React.FC<ModeProgressProps> = ({ mode, completedLevels = 0 }
     <View style={styles.container}>
       <View style={styles.countContainer}>
         <View style={styles.flexContainer}>
-          <Text style={styles.starCount}>{completedLevels}/7</Text>
+          <Text style={styles.completedCount}>{completedLevels}/7</Text>
         </View>
       </View>
     </View>
@@ -36,10 +36,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  starCount: {
-    marginLeft: 5,
+  completedCount: {
+    marginHorizontal: 5,
     fontWeight: 'bold',
-    fontSize: hp('2%'),
+    fontSize: hp('2.5%'),
     color: '#444',
   }
 });
