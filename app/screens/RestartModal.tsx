@@ -23,7 +23,6 @@ const RestartModal: React.FC<RestartModalProps> = ({
 }) => {
   // Animation refs
   const scaleAnim = useRef(new Animated.Value(0.5)).current;
-  const rotateAnim = useRef(new Animated.Value(0)).current;
   const opacityAnim = useRef(new Animated.Value(0)).current;
   
   // Determines if animations should run when modal becomes visible
@@ -33,7 +32,6 @@ const RestartModal: React.FC<RestartModalProps> = ({
     } else {
       // Reset animations when modal is hidden
       scaleAnim.setValue(0.5);
-      rotateAnim.setValue(0);
       opacityAnim.setValue(0);
     }
   }, [visible]);
