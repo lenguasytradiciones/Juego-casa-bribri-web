@@ -1,19 +1,18 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { LevelMode } from '../misc/progress';
+import { View, Text, StyleSheet } from 'react-native';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { LEVELS } from '../misc/constants';
 
 interface ModeProgressProps {
-  mode: LevelMode;  // Mode to display progress for
   completedLevels?: number;
 }
 
 // Component that shows the amount of levels completed for a mode
-const ModeProgress: React.FC<ModeProgressProps> = ({ mode, completedLevels = 0 }) => {
+const ModeProgress: React.FC<ModeProgressProps> = ({ completedLevels = 0 }) => {
   return (
     <View style={styles.container}>
       <View style={styles.countContainer}>
         <View style={styles.flexContainer}>
-          <Text style={styles.completedCount}>{completedLevels}/7</Text>
+          <Text style={styles.completedCount}>{completedLevels}/LEVELS.length</Text>
         </View>
       </View>
     </View>

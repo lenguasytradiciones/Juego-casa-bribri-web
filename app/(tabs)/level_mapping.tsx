@@ -45,8 +45,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
       setProgress(updatedProgress);
 
       // If all levels are completed in both modes, show restart modal
-      if (updatedProgress.readLevels.length === LEVELS.length &&
-         updatedProgress.listenLevels.length === LEVELS.length
+      if (updatedProgress.readLevels.length === 1
       ) {
         setShowRestartModal(true);
       }
@@ -213,13 +212,13 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                 {/* Read and Listen Progress (Shown if no mode is selected) */}
                 {isModeSelected ? null : (
                   <View style={styles.readProgressContainer}>
-                    <ModeProgress mode={LevelMode.READ} completedLevels={progress?.readLevels.length}/>
+                    <ModeProgress completedLevels={progress?.readLevels.length}/>
                   </View>
                 )}
 
                 {isModeSelected ? null : (
                   <View style={styles.listenProgressContainer}>
-                    <ModeProgress mode={LevelMode.LISTEN} completedLevels={progress?.listenLevels.length} />
+                    <ModeProgress completedLevels={progress?.listenLevels.length} />
                   </View>
                 )}
 
