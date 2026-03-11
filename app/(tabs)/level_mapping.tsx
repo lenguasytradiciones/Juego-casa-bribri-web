@@ -209,19 +209,15 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   </TouchableOpacity>
                 </HoverTooltip>
 
-                {/* Read and Listen Progress (Shown if no mode is selected) */}
-                {isModeSelected ? null : (
-                  <View style={styles.readProgressContainer}>
-                    <ModeProgress completedLevels={progress?.readLevels.length}/>
-                  </View>
-                )}
-
-                {isModeSelected ? null : (
-                  <View style={styles.listenProgressContainer}>
-                    <ModeProgress completedLevels={progress?.listenLevels.length} />
-                  </View>
-                )}
-
+                {/* Read and Listen Progress (Shown if no mode is selected) */} 
+                <View style={styles.readProgressContainer}>
+                  <ModeProgress completedLevels={progress?.readLevels.length}/>
+                </View>
+              
+                <View style={styles.listenProgressContainer}>
+                  <ModeProgress completedLevels={progress?.listenLevels.length} />
+                </View>
+                
                 <HoverTooltip explanation='Asociar texto con imagen' tooltipStyle={{ bottom: '75%' }}>
                   <TouchableOpacity
                     activeOpacity={0.7}
