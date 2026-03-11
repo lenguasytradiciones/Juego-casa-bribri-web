@@ -45,8 +45,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
       setProgress(updatedProgress);
 
       // If all levels are completed in both modes, show restart modal
-      if (updatedProgress.readLevels.length === LEVELS.length &&
-         updatedProgress.listenLevels.length === LEVELS.length
+      if (updatedProgress.readLevels.length === 1
       ) {
         setShowRestartModal(true);
       }
@@ -187,19 +186,6 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
             resizeMode={Platform.OS === 'web' ? 'stretch' : 'stretch'}
           />
 
-          {/* Read and Listen Progress (Shown if no mode is selected) */}
-          {isModeSelected ? null : (
-            <View style={styles.readProgressContainer}>
-              <ModeProgress mode={LevelMode.READ} completedLevels={progress?.readLevels.length}/>
-            </View>
-          )}
-
-          {isModeSelected ? null : (
-            <View style={styles.listenProgressContainer}>
-              <ModeProgress mode={LevelMode.LISTEN} completedLevels={progress?.listenLevels.length} />
-            </View>
-          )}
-
           {/* Custom Back Button */}
           <BackButton onPress={handleBackPress} />
 
@@ -223,6 +209,15 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   </TouchableOpacity>
                 </HoverTooltip>
 
+                {/* Read and Listen Progress (Shown if no mode is selected) */} 
+                <View style={styles.readProgressContainer}>
+                  <ModeProgress completedLevels={progress?.readLevels.length}/>
+                </View>
+              
+                <View style={styles.listenProgressContainer}>
+                  <ModeProgress completedLevels={progress?.listenLevels.length} />
+                </View>
+                
                 <HoverTooltip explanation='Asociar texto con imagen' tooltipStyle={{ bottom: '75%' }}>
                   <TouchableOpacity
                     activeOpacity={0.7}
@@ -343,13 +338,13 @@ const styles = StyleSheet.create({
   // Mode progress displays
   listenProgressContainer: {
     position: 'absolute',
-    top: hp('31%'),
-    left: wp('25.75%'),
+    bottom: hp('30%'),
+    left: wp('18%'),
   },
   readProgressContainer: {
     position: 'absolute',
-    top: hp('31%'),
-    right: wp('25.75%'),
+    bottom: hp('30%'),
+    right: wp('17.5%'),
   },
 });
 

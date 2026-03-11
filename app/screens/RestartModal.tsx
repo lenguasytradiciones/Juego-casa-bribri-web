@@ -23,7 +23,6 @@ const RestartModal: React.FC<RestartModalProps> = ({
 }) => {
   // Animation refs
   const scaleAnim = useRef(new Animated.Value(0.5)).current;
-  const rotateAnim = useRef(new Animated.Value(0)).current;
   const opacityAnim = useRef(new Animated.Value(0)).current;
   
   // Determines if animations should run when modal becomes visible
@@ -33,7 +32,6 @@ const RestartModal: React.FC<RestartModalProps> = ({
     } else {
       // Reset animations when modal is hidden
       scaleAnim.setValue(0.5);
-      rotateAnim.setValue(0);
       opacityAnim.setValue(0);
     }
   }, [visible]);
@@ -55,21 +53,8 @@ const RestartModal: React.FC<RestartModalProps> = ({
           useNativeDriver: true,
         })
       ]),
-      // Rotate item
-      Animated.timing(rotateAnim, {
-        toValue: 2, // 2 full rotations (720 degrees)
-        duration: 1000,
-        easing: Easing.out(Easing.cubic),
-        useNativeDriver: true,
-      })
     ]).start();
   };
-  
-  // Map rotation value to degrees
-  const rotation = rotateAnim.interpolate({
-    inputRange: [0, 2],
-    outputRange: ['0deg', '720deg']
-  });
   
   // Handler for resetting progress and closing modal
   const handleRestart = async () => {
@@ -99,15 +84,11 @@ const RestartModal: React.FC<RestartModalProps> = ({
           <Text style={styles.congratsText}>¡Felicidades!</Text>
           <Text style={styles.descriptionText}>Ha completado todos los niveles</Text>
 
-          <Animated.View style={{
-            transform: [{ rotate: rotation }]
-          }}>
-            <Image
-              source={require('@/assets/images/u.png')}
-              style={styles.itemImage}
-              resizeMode="contain"
-            />
-          </Animated.View>
+          <Image
+            source={require('@/assets/images/casa_sin_elementos.png')}
+            style={styles.itemImage}
+            resizeMode="contain"
+          />
           
           <View style={styles.buttonsContainer}>        
             {(
