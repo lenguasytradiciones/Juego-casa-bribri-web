@@ -20,6 +20,7 @@ interface ResetProgressModalProps {
   onContinue?: () => void; // Optional callback for "Continue" action
 }
 
+// Generic modal component for resetting progress, which could be optional (for modes) or not (full reset)
 const ResetProgressModal: React.FC<ResetProgressModalProps> = ({
   visible,
   title,

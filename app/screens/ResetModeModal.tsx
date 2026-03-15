@@ -7,6 +7,7 @@ interface ResetModeModalProps {
   mode: LevelMode;
 }
 
+// Modal specifically for resetting progress of a single mode when all levels in that mode are completed
 const ResetModeModal: React.FC<ResetModeModalProps> = ({
   visible,
   onClose,

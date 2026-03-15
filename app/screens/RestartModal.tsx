@@ -6,6 +6,7 @@ interface RestartModalProps {
   onClose: () => void;
 }
 
+// Modal specifically for resetting all progress when all levels in both modes are completed
 const RestartModal: React.FC<RestartModalProps> = ({
   visible,
   onClose,
