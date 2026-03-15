@@ -12,7 +12,7 @@ const ModeProgress: React.FC<ModeProgressProps> = ({ completedLevels = 0 }) => {
     <View style={styles.container}>
       <View style={styles.countContainer}>
         <View style={styles.flexContainer}>
-          <Text style={styles.completedCount}>{completedLevels}/LEVELS.length</Text>
+          <Text style={styles.completedCount}>{completedLevels}/{LEVELS.length}</Text>
         </View>
       </View>
     </View>
