@@ -94,3 +94,17 @@ export async function resetProgress(): Promise<void> {
     console.error('Error resetting progress:', error);
   }
 }
+
+/**
+ * Reset progress for a specific mode
+ * @param mode The mode to reset (read or listen)
+ */
+export async function resetModeProgress(mode: LevelMode): Promise<void> {
+  try {
+    const storageKey = mode === LevelMode.READ ? READ_LEVELS_KEY : LISTEN_LEVELS_KEY;
+    await AsyncStorage.removeItem(storageKey);
+    console.log(`${mode} mode progress reset successfully`);
+  } catch (error) {
+    console.error(`Error resetting ${mode} mode progress:`, error);
+  }
+}
