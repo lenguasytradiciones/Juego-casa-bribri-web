@@ -45,7 +45,8 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
       setProgress(updatedProgress);
 
       // If all levels are completed in both modes, show restart modal
-      if (updatedProgress.readLevels.length === 1
+      if (updatedProgress.readLevels.length === LEVELS.length &&
+          updatedProgress.listenLevels.length === LEVELS.length
       ) {
         setShowRestartModal(true);
       }
@@ -195,6 +196,15 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
           <View style={styles.content}>
             {!isModeSelected ? (
               <View style={styles.buttonContainer}>
+                {/* Read and Listen Progress (Shown if no mode is selected) */} 
+                <View style={styles.readProgressContainer}>
+                  <ModeProgress completedLevels={progress?.readLevels.length}/>
+                </View>
+              
+                <View style={styles.listenProgressContainer}>
+                  <ModeProgress completedLevels={progress?.listenLevels.length} />
+                </View>
+                
                 <HoverTooltip explanation="Asociar audio con imagen" tooltipStyle={{ bottom: '75%', width: wp('30%') }}> 
                   <TouchableOpacity
                     activeOpacity={0.7}
@@ -209,14 +219,6 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   </TouchableOpacity>
                 </HoverTooltip>
 
-                {/* Read and Listen Progress (Shown if no mode is selected) */} 
-                <View style={styles.readProgressContainer}>
-                  <ModeProgress completedLevels={progress?.readLevels.length}/>
-                </View>
-              
-                <View style={styles.listenProgressContainer}>
-                  <ModeProgress completedLevels={progress?.listenLevels.length} />
-                </View>
                 
                 <HoverTooltip explanation='Asociar texto con imagen' tooltipStyle={{ bottom: '75%' }}>
                   <TouchableOpacity
