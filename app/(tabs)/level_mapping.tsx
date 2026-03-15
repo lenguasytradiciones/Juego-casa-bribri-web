@@ -18,13 +18,16 @@ import ModeProgress from '../screens/ModeProgress';
 import LevelStatusFlag from '../screens/LevelStatusFlag';
 import HoverTooltip from '@/components/HoverTooltip';
 import RestartModal from '../screens/RestartModal';
+import ResetModeModal from '../screens/ResetModeModal';
 
 const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [mode, setMode] = useState<string | null>(null);  // Selected mode
   const [isModeSelected, setIsModeSelected] = useState<boolean>(false);  // Flag of whether mode was selected
   const [progress, setProgress] = useState<LevelProgress | null>(null);
   const [showRestartModal, setShowRestartModal] = useState<boolean>(false);
-
+  const [showResetReadingModeModal, setShowResetReadingModeModal] = useState<boolean>(false);
+  const [showResetListeningModeModal, setShowResetListeningModeModal] = useState<boolean>(false);
+ 
   // Fetch mode from AsyncStorage to show correct levels
   const fetchSettings = async () => {
     try {
@@ -44,10 +47,19 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
       const updatedProgress = await getLevelProgress();
       setProgress(updatedProgress);
 
+      // Check if all levels are completed in either mode
+      const readLevelsComplete = updatedProgress.readLevels.length === LEVELS.length;
+      const listenLevelsComplete = updatedProgress.listenLevels.length === LEVELS.length;
+
       // If all levels are completed in both modes, show restart modal
-      if (updatedProgress.readLevels.length === 1
-      ) {
+      if (readLevelsComplete && listenLevelsComplete) {
         setShowRestartModal(true);
+      } else if (readLevelsComplete) {
+        // If all reading levels are completed, show reset reading mode modal
+        setShowResetReadingModeModal(true);
+      } else if (listenLevelsComplete) {
+        // If all listening levels are completed, show reset listening mode modal
+        setShowResetListeningModeModal(true);
       }
     } catch (error) {
       console.error('Error loading progress:', error);
@@ -174,6 +186,8 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const handleRestart = async () => {
     await checkProgress();
     setShowRestartModal(false);
+    setShowResetListeningModeModal(false);
+    setShowResetReadingModeModal(false);
   };
 
   return (
@@ -190,11 +204,22 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
           <BackButton onPress={handleBackPress} />
 
           <RestartModal visible={showRestartModal} onClose={handleRestart} />
+          <ResetModeModal mode={LevelMode.READ} visible={showResetReadingModeModal} onClose={handleRestart}/>
+          <ResetModeModal mode={LevelMode.LISTEN} visible={showResetListeningModeModal} onClose={handleRestart}/>
 
           {/* Main Content */}
           <View style={styles.content}>
             {!isModeSelected ? (
               <View style={styles.buttonContainer}>
+                {/* Read and Listen Progress (Shown if no mode is selected) */} 
+                <View style={styles.readProgressContainer}>
+                  <ModeProgress completedLevels={progress?.readLevels.length}/>
+                </View>
+              
+                <View style={styles.listenProgressContainer}>
+                  <ModeProgress completedLevels={progress?.listenLevels.length} />
+                </View>
+                
                 <HoverTooltip explanation="Asociar audio con imagen" tooltipStyle={{ bottom: '75%', width: wp('30%') }}> 
                   <TouchableOpacity
                     activeOpacity={0.7}
@@ -209,14 +234,6 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
                   </TouchableOpacity>
                 </HoverTooltip>
 
-                {/* Read and Listen Progress (Shown if no mode is selected) */} 
-                <View style={styles.readProgressContainer}>
-                  <ModeProgress completedLevels={progress?.readLevels.length}/>
-                </View>
-              
-                <View style={styles.listenProgressContainer}>
-                  <ModeProgress completedLevels={progress?.listenLevels.length} />
-                </View>
                 
                 <HoverTooltip explanation='Asociar texto con imagen' tooltipStyle={{ bottom: '75%' }}>
                   <TouchableOpacity
