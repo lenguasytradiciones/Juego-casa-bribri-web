@@ -53,10 +53,12 @@ const ABOUT_THE_PROJECT_HTML = `
 `;
 
 const CREDITS_HTML = `
-  <section>    
+  <section>
+    <h1>Créditos</h1>
     <div style="margin-bottom: 15px;">
       <b>Desarrollo del sitio web</b>
-      <p>Alexánder Quesada Quesada, Allison Foster McLeod, Joseph Nuñez Solano y Pablo Hernández Bonilla (primera versión).\nEvan Chen Cheng (ajustes a la primera versión y versión final).</p>
+      <p>Alexánder Quesada Quesada, Allison Foster McLeod, Joseph Nuñez Solano y Pablo Hernández Bonilla (primera versión).</p>
+      <p>Evan Chen Cheng (ajustes a la primera versión y versión final).</p>
     </div>
 
     <div style="margin-bottom: 15px;">
