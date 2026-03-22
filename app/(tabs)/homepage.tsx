@@ -12,9 +12,11 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import HoverTooltip from '@/components/HoverTooltip';
 import AboutTheResourceModal from '../screens/AboutTheResourceModal';
+import CreditsModal from '../screens/CreditsModal';
 
 const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [showAboutTheResourceModal, setShowAboutTheResourceModal] = useState(false);
+  const [showCreditsModal, setShowCreditsModal] = useState(false);
 
   // Navigates to level mapping when play button is pressed
   const handlePress = () => {
@@ -26,12 +28,7 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
   };
 
   const handleCreditos = () => {
-    // Show credits alert or navigate to credits screen
-    Alert.alert(
-      'Créditos',
-      'Desarrollado para el aprendizaje de la lengua BriBri.\n\nBasado en el Diccionario de la Casa Tradicional BriBri de la Universidad de Costa Rica.',
-      [{ text: 'Cerrar', style: 'default' }]
-    );
+    setShowCreditsModal(true);
   };
 
   return (
@@ -59,7 +56,8 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
         </View>
 
         <AboutTheResourceModal visible={showAboutTheResourceModal} onClose={() => setShowAboutTheResourceModal(false)} />
-
+        <CreditsModal visible={showCreditsModal} onClose={() => setShowCreditsModal(false)} />
+          
         {/* Contenedor inferior */}
         <View style={styles.bottomContainer}>
           <Image
