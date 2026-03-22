@@ -33,7 +33,10 @@ const InformationModal: React.FC<InformationModalProps> = ({
       transparent={true}
     >
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollPadding}>
+        <ScrollView 
+          contentContainerStyle={styles.scrollPadding} 
+          showsVerticalScrollIndicator={false}
+        >
           <Text style={styles.title}>{title}</Text>
 
           <RenderHtml
@@ -46,14 +49,16 @@ const InformationModal: React.FC<InformationModalProps> = ({
             }}
           />
           
-          {/* <Image source={require('@/assets/images/logo_ucr.png')} />
-          <Image source={require('@/assets/images/logo_accion_social.png')} />
-          <Image source={require('@/assets/images/logo_filologia.png')} /> */}
+          <View style={styles.footerContainer}>
+            <Image style={styles.ucrLogo} source={require('@/assets/images/logo_ucr.png')} />
+            <Image style={styles.accionSocialLogo} source={require('@/assets/images/logo_accion_social.png')} />
+            <Image style={styles.filologiaLogo} source={require('@/assets/images/logo_filologia.png')} />
 
-          {/* Button to close the modal */}
-          <TouchableOpacity style={styles.returnButton} onPress={onClose}>
-            <Text style={styles.returnButtonText}>Regresar</Text>
-          </TouchableOpacity>
+            {/* Button to close the modal */}
+            <TouchableOpacity style={styles.returnButton} onPress={onClose}>
+              <Text style={styles.returnButtonText}>Regresar</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
 
         
@@ -73,10 +78,10 @@ const styles = StyleSheet.create({
     width: wp('80%'),
     padding: 20,
     backgroundColor: 'white',
+    borderWidth: 3,
     borderRadius: 15,
     alignItems: 'center',
-    marginVertical: hp('3%'),
-    borderWidth: 3,
+    marginVertical: hp('2%'),
     borderColor: '#FFD700',
   },
   title: {
@@ -84,6 +89,29 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 10,
+  },
+  footerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    height: hp('10%'),
+    marginBottom: hp('2%'),
+  },
+  ucrLogo: {
+    width: wp('10%'),
+    height: hp('10%'),
+    alignItems: 'center',
+    marginHorizontal: 10,  
+  },
+  filologiaLogo: {
+    width: wp('30%'),
+    height: hp('10%'),
+    marginLeft: -20,
+  },
+  accionSocialLogo: {
+    width: wp('25.5%'),
+    height: hp('9.1%'),
   },
   returnButton: {
     backgroundColor: '#F49D1E',
