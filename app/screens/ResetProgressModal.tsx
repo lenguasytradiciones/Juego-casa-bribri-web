@@ -97,7 +97,7 @@ const ResetProgressModal: React.FC<ResetProgressModalProps> = ({
                 style={[styles.button, styles.resetButton]} 
                 onPress={onConfirm}
               >
-                <Text style={styles.buttonText}>Reiniciar Progreso</Text>
+                <Text style={styles.buttonText}>Reiniciar</Text>
               </TouchableOpacity>
             )}
 
