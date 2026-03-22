@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavigationProp } from '@react-navigation/native';
 import { Image } from "expo-image";
 import {
@@ -5,25 +6,23 @@ import {
   Platform,
   StyleSheet,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import HoverTooltip from '@/components/HoverTooltip';
+import AboutTheResourceModal from '../screens/AboutTheResourceModal';
 
 const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
+  const [showAboutTheResourceModal, setShowAboutTheResourceModal] = useState(false);
+
   // Navigates to level mapping when play button is pressed
   const handlePress = () => {
     navigation.navigate('LevelMapping');
   };
 
-  const handleInstrucciones = () => {
-    // Show instructions alert or navigate to instructions screen
-    Alert.alert(
-      'Instrucciones',
-      'Selecciona un modo de aprendizaje, luego elige un nivel. Empareja las palabras con las imágenes correctas para completar cada nivel.',
-      [{ text: 'Entendido', style: 'default' }]
-    );
+  const handleAboutTheResource = () => {
+    setShowAboutTheResourceModal(true);
   };
 
   const handleCreditos = () => {
@@ -34,6 +33,7 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
       [{ text: 'Cerrar', style: 'default' }]
     );
   };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -58,6 +58,8 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           </HoverTooltip>
         </View>
 
+        <AboutTheResourceModal visible={showAboutTheResourceModal} onClose={() => setShowAboutTheResourceModal(false)} />
+
         {/* Contenedor inferior */}
         <View style={styles.bottomContainer}>
           <Image
@@ -67,9 +69,9 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           />
           {/* Contenedor interno para centrar los botones */}
           <View style={styles.bottomButtonsContainer}>
-            {/* Botón de Instrucciones (Proximamente Informacion)*/}
-            <HoverTooltip explanation='Instrucciones'>
-              <TouchableOpacity onPress={handleInstrucciones} style={styles.bottomButton}>
+            {/* Botón de "Acerca de este Recurso"s*/}
+            <HoverTooltip explanation='Acerca de este Recurso'>
+              <TouchableOpacity onPress={handleAboutTheResource} style={styles.bottomButton}>
                 <Image
                   source={require('@/assets/images/instrucciones.png')}
                   style={styles.buttonIcon}
