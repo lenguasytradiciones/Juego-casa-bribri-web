@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   filologiaLogo: {
     width: wp('20%'),
     height: hp('7%'),
-    marginLeft: -30,
+    marginHorizontal: -30,
   },
   accionSocialLogo: {
     width: wp('18%'),
