@@ -34,13 +34,19 @@ const ABOUT_THE_PROJECT_HTML = `
     <p>
       El proyecto de trabajo comunal universitario <b>TC-625 “Lenguas y tradiciones orales de Costa Rica”</b>, 
       adscrito a la Escuela de Filología, Lingüística y Literatura y a la Vicerrectoría de Acción Social 
-      de la Universidad de Costa Rica, colabora con diversas comunidades etnolingüísticas de Costa Rica con 
-      el objetivo de fortalecer la presencia de sus lenguas y culturas autóctonas.
+      de la Universidad de Costa Rica, colabora con diversas comunidades etnolingüísticas de Costa Rica con el 
+      objetivo de fortalecer la presencia de sus lenguas y culturas autóctonas mediante iniciativas de fortalecimiento, 
+      promoción, documentación, visibilización, revalorización, enseñanza y revitalización ideadas, elaboradas e implementadas 
+      en consulta con miembros de los respectivos pueblos. El proyecto promueve la participación activa de adultos, jóvenes y 
+      niños de las comunidades con la que trabajamos.
     </p>
     <p>
       Uno de los propósitos más importantes del proyecto es la creación de recursos didácticos y de consulta 
       adecuados para la población y elaborados con criterios técnicos de diseño gráfico, lingüística aplicada 
-      y uso de nuevas tecnologías. El presente sitio web constituye una muestra de esta forma de proceder.
+      (didáctica de la lengua y revitalización lingüística) y uso de nuevas tecnologías. 
+      El presente sitio web constituye una muestra de esta forma de proceder. 
+      Esperamos que sea de utilidad para los miembros del pueblo bribri, así como para todas las personas interesadas 
+      en la lengua y la cultura de este grupo. 
     </p>
     <p style="margin-top: 20px;">
       <b>Luis Serrato Pineda</b><br>
@@ -55,30 +61,40 @@ const ABOUT_THE_PROJECT_HTML = `
 const CREDITS_HTML = `
   <section>
     <h1>Créditos</h1>
-    <div style="margin-bottom: 15px;">
+    <div style="margin-bottom: 10px;">
       <b>Desarrollo del sitio web</b>
       <p>Alexánder Quesada Quesada, Allison Foster McLeod, Joseph Nuñez Solano y Pablo Hernández Bonilla (primera versión).</p>
       <p>Evan Chen Cheng (ajustes a la primera versión y versión final).</p>
     </div>
 
-    <div style="margin-bottom: 15px;">
+    <div style="margin-bottom: 10px;">
       <b>Elementos de diseño gráfico</b>
       <p>Víctor Mora Mora y Laura Jiménez Cubillo</p>
     </div>
 
-    <div style="margin-bottom: 15px;">
+    <div style="margin-bottom: 10px;">
       <b>Asesoría lingüístico-cultural y voz de los audios</b>
       <p>Alí García Segura</p>
     </div>
 
-    <div style="margin-bottom: 15px;">
+    <div style="margin-bottom: 10px;">
       <b>Diseño y revisión del recurso, y coordinación general del proceso</b>
       <p>Luis Serrato Pineda</p>
     </div>
 
-    <div style="margin-bottom: 15px;">
+    <div style="margin-bottom: 10px;">
       <b>Diseño e ilustraciones del material base</b>
       <p>Diego Zúñiga Espinoza</p>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <b>Artes finales del material base</b>
+      <p>Ronny Marín Barrios</p>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <b>Coordinación del proyecto</b>
+      <p>Luis Serrato Pineda</p>
     </div>
 
     <p style="text-align: center; margin-top: 20px;">2026</p>
