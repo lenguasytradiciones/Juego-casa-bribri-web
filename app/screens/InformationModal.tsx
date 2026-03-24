@@ -37,7 +37,7 @@ const InformationModal: React.FC<InformationModalProps> = ({
           contentContainerStyle={styles.scrollPadding} 
           showsVerticalScrollIndicator={false}
         >
-          <Text style={styles.title}>{title}</Text>
+          {title && <Text style={styles.title}>{title}</Text>}
 
           <RenderHtml
             contentWidth={width}
