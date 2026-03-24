@@ -25,6 +25,7 @@ const InformationModal: React.FC<InformationModalProps> = ({
   onClose
 }) => {
   const { width } = useWindowDimensions();
+  const availableWidth = width * 0.8;
 
   return (
     <Modal 
@@ -40,7 +41,7 @@ const InformationModal: React.FC<InformationModalProps> = ({
           {title && <Text style={styles.title}>{title}</Text>}
 
           <RenderHtml
-            contentWidth={width}
+            contentWidth={availableWidth}
             source={{ html: content }}
             // You can customize styles for specific tags here
             tagsStyles={{
