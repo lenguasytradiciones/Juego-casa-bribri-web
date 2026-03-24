@@ -66,7 +66,7 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           />
           {/* Contenedor interno para centrar los botones */}
           <View style={styles.bottomButtonsContainer}>
-            {/* Botón de "Acerca de este Recurso"s*/}
+            {/* Botón de "Acerca de este Recurso"*/}
             <HoverTooltip explanation='Acerca de este Recurso'>
               <TouchableOpacity onPress={handleAboutTheResource} style={styles.bottomButton}>
                 <Image
