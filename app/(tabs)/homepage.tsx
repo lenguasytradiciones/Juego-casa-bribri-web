@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { NavigationProp } from '@react-navigation/native';
 import { Image } from "expo-image";
 import {
-  Alert,
   Platform,
   StyleSheet,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -57,7 +56,7 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
 
         <AboutTheResourceModal visible={showAboutTheResourceModal} onClose={() => setShowAboutTheResourceModal(false)} />
         <CreditsModal visible={showCreditsModal} onClose={() => setShowCreditsModal(false)} />
-          
+
         {/* Contenedor inferior */}
         <View style={styles.bottomContainer}>
           <Image
