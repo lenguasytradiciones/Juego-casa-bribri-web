@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import { NavigationProp } from '@react-navigation/native';
 import { Image } from "expo-image";
 import {
-  Alert,
   Platform,
   StyleSheet,
   TouchableOpacity,
@@ -10,30 +10,26 @@ import {
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import HoverTooltip from '@/components/HoverTooltip';
+import AboutTheResourceModal from '../screens/AboutTheResourceModal';
+import CreditsModal from '../screens/CreditsModal';
 
 const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
+  const [showAboutTheResourceModal, setShowAboutTheResourceModal] = useState(false);
+  const [showCreditsModal, setShowCreditsModal] = useState(false);
+
   // Navigates to level mapping when play button is pressed
   const handlePress = () => {
     navigation.navigate('LevelMapping');
   };
 
-  const handleInstrucciones = () => {
-    // Show instructions alert or navigate to instructions screen
-    Alert.alert(
-      'Instrucciones',
-      'Selecciona un modo de aprendizaje, luego elige un nivel. Empareja las palabras con las imágenes correctas para completar cada nivel.',
-      [{ text: 'Entendido', style: 'default' }]
-    );
+  const handleAboutTheResource = () => {
+    setShowAboutTheResourceModal(true);
   };
 
   const handleCreditos = () => {
-    // Show credits alert or navigate to credits screen
-    Alert.alert(
-      'Créditos',
-      'Desarrollado para el aprendizaje de la lengua BriBri.\n\nBasado en el Diccionario de la Casa Tradicional BriBri de la Universidad de Costa Rica.',
-      [{ text: 'Cerrar', style: 'default' }]
-    );
+    setShowCreditsModal(true);
   };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -58,6 +54,9 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           </HoverTooltip>
         </View>
 
+        <AboutTheResourceModal visible={showAboutTheResourceModal} onClose={() => setShowAboutTheResourceModal(false)} />
+        <CreditsModal visible={showCreditsModal} onClose={() => setShowCreditsModal(false)} />
+
         {/* Contenedor inferior */}
         <View style={styles.bottomContainer}>
           <Image
@@ -67,9 +66,9 @@ const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
           />
           {/* Contenedor interno para centrar los botones */}
           <View style={styles.bottomButtonsContainer}>
-            {/* Botón de Instrucciones (Proximamente Informacion)*/}
-            <HoverTooltip explanation='Instrucciones'>
-              <TouchableOpacity onPress={handleInstrucciones} style={styles.bottomButton}>
+            {/* Botón de "Acerca de este Recurso"*/}
+            <HoverTooltip explanation='Acerca de este Recurso'>
+              <TouchableOpacity onPress={handleAboutTheResource} style={styles.bottomButton}>
                 <Image
                   source={require('@/assets/images/instrucciones.png')}
                   style={styles.buttonIcon}
