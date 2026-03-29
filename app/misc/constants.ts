@@ -49,7 +49,7 @@ const ABOUT_THE_PROJECT_HTML = `
       en la lengua y la cultura de este grupo. 
     </p>
     <p style="margin-top: 20px;">
-      <b>Luis Serrato Pineda</b><br>
+      Luis Serrato Pineda<br>
       Coordinador del proyecto<br>
       Universidad de Costa Rica<br>
       Contacto: <a href="mailto:dipalicori@ucr.ac.cr">dipalicori@ucr.ac.cr</a><br>
@@ -96,8 +96,6 @@ const CREDITS_HTML = `
       <b>Coordinación del proyecto</b>
       <p>Luis Serrato Pineda</p>
     </div>
-
-    <p style="text-align: center; margin-top: 20px;">2026</p>
   </section>
 `;
 
