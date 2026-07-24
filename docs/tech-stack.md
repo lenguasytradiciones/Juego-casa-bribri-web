@@ -1,9 +1,9 @@
-# Stack Tecnológico
+# Stack Tecnológico - JuegoCasaBribri
 
 Este proyecto utiliza un conjunto de tecnologías modernas enfocadas en el desarrollo de aplicaciones móviles multiplataforma, dada la meta original. A continuación se describen las principales herramientas y librerías utilizadas, organizadas según su función dentro de la arquitectura del proyecto.
 
 ## Tabla de contenidos
-- [Stack Tecnologico](#stack-tecnológico)
+- [Stack Tecnológico - JuegoCasaBribri](#stack-tecnológico---juegocasabribri)
   - [1. Frontend](#1-frontend)
   - [2. Navegación](#2-navegación)
   - [3. Estado y Almacenamiento](#3-estado-y-almacenamiento)
