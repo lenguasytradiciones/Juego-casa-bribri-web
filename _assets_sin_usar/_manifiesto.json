@@ -1,0 +1,413 @@
+{
+  "fecha": "2026-07-29T03:24:48.662Z",
+  "archivos": [
+    {
+      "original": "assets\\audios\\olowe_casa_rectangular.wav",
+      "cuarentena": "_assets_sin_usar\\audios\\olowe_casa_rectangular.wav"
+    },
+    {
+      "original": "assets\\audios\\ta.wav",
+      "cuarentena": "_assets_sin_usar\\audios\\ta.wav"
+    },
+    {
+      "original": "assets\\icon.png",
+      "cuarentena": "_assets_sin_usar\\icon.png"
+    },
+    {
+      "original": "assets\\images\\aiko_ko.png",
+      "cuarentena": "_assets_sin_usar\\images\\aiko_ko.png"
+    },
+    {
+      "original": "assets\\images\\aiko_ko2.png",
+      "cuarentena": "_assets_sin_usar\\images\\aiko_ko2.png"
+    },
+    {
+      "original": "assets\\images\\akwawe.png",
+      "cuarentena": "_assets_sin_usar\\images\\akwawe.png"
+    },
+    {
+      "original": "assets\\images\\Base.png",
+      "cuarentena": "_assets_sin_usar\\images\\Base.png"
+    },
+    {
+      "original": "assets\\images\\camino.png",
+      "cuarentena": "_assets_sin_usar\\images\\camino.png"
+    },
+    {
+      "original": "assets\\images\\camino_ref.png",
+      "cuarentena": "_assets_sin_usar\\images\\camino_ref.png"
+    },
+    {
+      "original": "assets\\images\\chamulikata.png",
+      "cuarentena": "_assets_sin_usar\\images\\chamulikata.png"
+    },
+    {
+      "original": "assets\\images\\chane.png",
+      "cuarentena": "_assets_sin_usar\\images\\chane.png"
+    },
+    {
+      "original": "assets\\images\\entrada.png",
+      "cuarentena": "_assets_sin_usar\\images\\entrada.png"
+    },
+    {
+      "original": "assets\\images\\entrada_ref.png",
+      "cuarentena": "_assets_sin_usar\\images\\entrada_ref.png"
+    },
+    {
+      "original": "assets\\images\\etsok.png",
+      "cuarentena": "_assets_sin_usar\\images\\etsok.png"
+    },
+    {
+      "original": "assets\\images\\guia1juego.png",
+      "cuarentena": "_assets_sin_usar\\images\\guia1juego.png"
+    },
+    {
+      "original": "assets\\images\\guia5.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\guia5.jpg"
+    },
+    {
+      "original": "assets\\images\\guia5juego.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\guia5juego.jpg"
+    },
+    {
+      "original": "assets\\images\\guide1.png",
+      "cuarentena": "_assets_sin_usar\\images\\guide1.png"
+    },
+    {
+      "original": "assets\\images\\hamaca.png",
+      "cuarentena": "_assets_sin_usar\\images\\hamaca.png"
+    },
+    {
+      "original": "assets\\images\\hamaca_ref.png",
+      "cuarentena": "_assets_sin_usar\\images\\hamaca_ref.png"
+    },
+    {
+      "original": "assets\\images\\ilustraciones-01-Photoroom.png",
+      "cuarentena": "_assets_sin_usar\\images\\ilustraciones-01-Photoroom.png"
+    },
+    {
+      "original": "assets\\images\\ilustraciones-01.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\ilustraciones-01.jpg"
+    },
+    {
+      "original": "assets\\images\\ilustraciones-02-Photoroom.png",
+      "cuarentena": "_assets_sin_usar\\images\\ilustraciones-02-Photoroom.png"
+    },
+    {
+      "original": "assets\\images\\ilustraciones-02.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\ilustraciones-02.jpg"
+    },
+    {
+      "original": "assets\\images\\ilustraciones-03.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\ilustraciones-03.jpg"
+    },
+    {
+      "original": "assets\\images\\ilustraciones-04.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\ilustraciones-04.jpg"
+    },
+    {
+      "original": "assets\\images\\ilustraciones-05-Photoroom.png",
+      "cuarentena": "_assets_sin_usar\\images\\ilustraciones-05-Photoroom.png"
+    },
+    {
+      "original": "assets\\images\\ilustraciones-05.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\ilustraciones-05.jpg"
+    },
+    {
+      "original": "assets\\images\\ilustraciones-30.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\ilustraciones-30.jpg"
+    },
+    {
+      "original": "assets\\images\\image_levels.png",
+      "cuarentena": "_assets_sin_usar\\images\\image_levels.png"
+    },
+    {
+      "original": "assets\\images\\iwo.png",
+      "cuarentena": "_assets_sin_usar\\images\\iwo.png"
+    },
+    {
+      "original": "assets\\images\\iyi_tso_u_a_titulo.png",
+      "cuarentena": "_assets_sin_usar\\images\\iyi_tso_u_a_titulo.png"
+    },
+    {
+      "original": "assets\\images\\i_kule.png",
+      "cuarentena": "_assets_sin_usar\\images\\i_kule.png"
+    },
+    {
+      "original": "assets\\images\\kapokwa.png",
+      "cuarentena": "_assets_sin_usar\\images\\kapokwa.png"
+    },
+    {
+      "original": "assets\\images\\klowok.png",
+      "cuarentena": "_assets_sin_usar\\images\\klowok.png"
+    },
+    {
+      "original": "assets\\images\\ko.png",
+      "cuarentena": "_assets_sin_usar\\images\\ko.png"
+    },
+    {
+      "original": "assets\\images\\ko3.png",
+      "cuarentena": "_assets_sin_usar\\images\\ko3.png"
+    },
+    {
+      "original": "assets\\images\\ko4.png",
+      "cuarentena": "_assets_sin_usar\\images\\ko4.png"
+    },
+    {
+      "original": "assets\\images\\kochane.png",
+      "cuarentena": "_assets_sin_usar\\images\\kochane.png"
+    },
+    {
+      "original": "assets\\images\\kokata.png",
+      "cuarentena": "_assets_sin_usar\\images\\kokata.png"
+    },
+    {
+      "original": "assets\\images\\koklowok.png",
+      "cuarentena": "_assets_sin_usar\\images\\koklowok.png"
+    },
+    {
+      "original": "assets\\images\\koklowok2.png",
+      "cuarentena": "_assets_sin_usar\\images\\koklowok2.png"
+    },
+    {
+      "original": "assets\\images\\kowolo.png",
+      "cuarentena": "_assets_sin_usar\\images\\kowolo.png"
+    },
+    {
+      "original": "assets\\images\\kowolo3.png",
+      "cuarentena": "_assets_sin_usar\\images\\kowolo3.png"
+    },
+    {
+      "original": "assets\\images\\kowolo4.png",
+      "cuarentena": "_assets_sin_usar\\images\\kowolo4.png"
+    },
+    {
+      "original": "assets\\images\\koyok_titulo.png",
+      "cuarentena": "_assets_sin_usar\\images\\koyok_titulo.png"
+    },
+    {
+      "original": "assets\\images\\ko_titulo.png",
+      "cuarentena": "_assets_sin_usar\\images\\ko_titulo.png"
+    },
+    {
+      "original": "assets\\images\\kula.png",
+      "cuarentena": "_assets_sin_usar\\images\\kula.png"
+    },
+    {
+      "original": "assets\\images\\kule.png",
+      "cuarentena": "_assets_sin_usar\\images\\kule.png"
+    },
+    {
+      "original": "assets\\images\\kule3.png",
+      "cuarentena": "_assets_sin_usar\\images\\kule3.png"
+    },
+    {
+      "original": "assets\\images\\kule4.png",
+      "cuarentena": "_assets_sin_usar\\images\\kule4.png"
+    },
+    {
+      "original": "assets\\images\\lv3bg.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\lv3bg.jpg"
+    },
+    {
+      "original": "assets\\images\\lv3bg_ref.png",
+      "cuarentena": "_assets_sin_usar\\images\\lv3bg_ref.png"
+    },
+    {
+      "original": "assets\\images\\lv4bg.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\lv4bg.jpg"
+    },
+    {
+      "original": "assets\\images\\lv4bg_ref.png",
+      "cuarentena": "_assets_sin_usar\\images\\lv4bg_ref.png"
+    },
+    {
+      "original": "assets\\images\\lv6bg.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\lv6bg.jpg"
+    },
+    {
+      "original": "assets\\images\\lv6bg_ref.png",
+      "cuarentena": "_assets_sin_usar\\images\\lv6bg_ref.png"
+    },
+    {
+      "original": "assets\\images\\lv7bg.png",
+      "cuarentena": "_assets_sin_usar\\images\\lv7bg.png"
+    },
+    {
+      "original": "assets\\images\\lv7bg_ref.png",
+      "cuarentena": "_assets_sin_usar\\images\\lv7bg_ref.png"
+    },
+    {
+      "original": "assets\\images\\lv7bg_ref_2.png",
+      "cuarentena": "_assets_sin_usar\\images\\lv7bg_ref_2.png"
+    },
+    {
+      "original": "assets\\images\\nak_kata.png",
+      "cuarentena": "_assets_sin_usar\\images\\nak_kata.png"
+    },
+    {
+      "original": "assets\\images\\olowe_titulo.png",
+      "cuarentena": "_assets_sin_usar\\images\\olowe_titulo.png"
+    },
+    {
+      "original": "assets\\images\\pabakok.png",
+      "cuarentena": "_assets_sin_usar\\images\\pabakok.png"
+    },
+    {
+      "original": "assets\\images\\pantalla_4_sin_elementos.png",
+      "cuarentena": "_assets_sin_usar\\images\\pantalla_4_sin_elementos.png"
+    },
+    {
+      "original": "assets\\images\\pantalla_5.png",
+      "cuarentena": "_assets_sin_usar\\images\\pantalla_5.png"
+    },
+    {
+      "original": "assets\\images\\pantalla_5_ref.png",
+      "cuarentena": "_assets_sin_usar\\images\\pantalla_5_ref.png"
+    },
+    {
+      "original": "assets\\images\\pantalla_6.png",
+      "cuarentena": "_assets_sin_usar\\images\\pantalla_6.png"
+    },
+    {
+      "original": "assets\\images\\pantalla_con_elementos.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\pantalla_con_elementos.jpg"
+    },
+    {
+      "original": "assets\\images\\pantalla_principal_nuevo.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\pantalla_principal_nuevo.jpg"
+    },
+    {
+      "original": "assets\\images\\pantalla_sin_elementos.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\pantalla_sin_elementos.jpg"
+    },
+    {
+      "original": "assets\\images\\partial-react-logo.png",
+      "cuarentena": "_assets_sin_usar\\images\\partial-react-logo.png"
+    },
+    {
+      "original": "assets\\images\\piska2.png",
+      "cuarentena": "_assets_sin_usar\\images\\piska2.png"
+    },
+    {
+      "original": "assets\\images\\play.png",
+      "cuarentena": "_assets_sin_usar\\images\\play.png"
+    },
+    {
+      "original": "assets\\images\\react-logo.png",
+      "cuarentena": "_assets_sin_usar\\images\\react-logo.png"
+    },
+    {
+      "original": "assets\\images\\react-logo@2x.png",
+      "cuarentena": "_assets_sin_usar\\images\\react-logo@2x.png"
+    },
+    {
+      "original": "assets\\images\\react-logo@3x.png",
+      "cuarentena": "_assets_sin_usar\\images\\react-logo@3x.png"
+    },
+    {
+      "original": "assets\\images\\sabak_dule.png",
+      "cuarentena": "_assets_sin_usar\\images\\sabak_dule.png"
+    },
+    {
+      "original": "assets\\images\\se.png",
+      "cuarentena": "_assets_sin_usar\\images\\se.png"
+    },
+    {
+      "original": "assets\\images\\seukuo.png",
+      "cuarentena": "_assets_sin_usar\\images\\seukuo.png"
+    },
+    {
+      "original": "assets\\images\\shkeki.png",
+      "cuarentena": "_assets_sin_usar\\images\\shkeki.png"
+    },
+    {
+      "original": "assets\\images\\skou.png",
+      "cuarentena": "_assets_sin_usar\\images\\skou.png"
+    },
+    {
+      "original": "assets\\images\\sku.png",
+      "cuarentena": "_assets_sin_usar\\images\\sku.png"
+    },
+    {
+      "original": "assets\\images\\tcho_tka.png",
+      "cuarentena": "_assets_sin_usar\\images\\tcho_tka.png"
+    },
+    {
+      "original": "assets\\images\\TCU_cb_ilustración_01-01.jpg",
+      "cuarentena": "_assets_sin_usar\\images\\TCU_cb_ilustración_01-01.jpg"
+    },
+    {
+      "original": "assets\\images\\techo_frente.png",
+      "cuarentena": "_assets_sin_usar\\images\\techo_frente.png"
+    },
+    {
+      "original": "assets\\images\\techo_frente_ref.png",
+      "cuarentena": "_assets_sin_usar\\images\\techo_frente_ref.png"
+    },
+    {
+      "original": "assets\\images\\tercero_pantalla_sin_elementos.png",
+      "cuarentena": "_assets_sin_usar\\images\\tercero_pantalla_sin_elementos.png"
+    },
+    {
+      "original": "assets\\images\\tiska_piska.png",
+      "cuarentena": "_assets_sin_usar\\images\\tiska_piska.png"
+    },
+    {
+      "original": "assets\\images\\to_ta.png",
+      "cuarentena": "_assets_sin_usar\\images\\to_ta.png"
+    },
+    {
+      "original": "assets\\images\\tska_tka.png",
+      "cuarentena": "_assets_sin_usar\\images\\tska_tka.png"
+    },
+    {
+      "original": "assets\\images\\tso.png",
+      "cuarentena": "_assets_sin_usar\\images\\tso.png"
+    },
+    {
+      "original": "assets\\images\\tso_klowok.png",
+      "cuarentena": "_assets_sin_usar\\images\\tso_klowok.png"
+    },
+    {
+      "original": "assets\\images\\u.png",
+      "cuarentena": "_assets_sin_usar\\images\\u.png"
+    },
+    {
+      "original": "assets\\images\\ukko.png",
+      "cuarentena": "_assets_sin_usar\\images\\ukko.png"
+    },
+    {
+      "original": "assets\\images\\uko.png",
+      "cuarentena": "_assets_sin_usar\\images\\uko.png"
+    },
+    {
+      "original": "assets\\images\\ulok.png",
+      "cuarentena": "_assets_sin_usar\\images\\ulok.png"
+    },
+    {
+      "original": "assets\\images\\ushu.png",
+      "cuarentena": "_assets_sin_usar\\images\\ushu.png"
+    },
+    {
+      "original": "assets\\images\\u_blatok_titulo.png",
+      "cuarentena": "_assets_sin_usar\\images\\u_blatok_titulo.png"
+    },
+    {
+      "original": "assets\\images\\u_clale_titulo.png",
+      "cuarentena": "_assets_sin_usar\\images\\u_clale_titulo.png"
+    },
+    {
+      "original": "assets\\images\\u_kibi_titulo.png",
+      "cuarentena": "_assets_sin_usar\\images\\u_kibi_titulo.png"
+    },
+    {
+      "original": "assets\\images\\u_tsi.png",
+      "cuarentena": "_assets_sin_usar\\images\\u_tsi.png"
+    },
+    {
+      "original": "assets\\images\\u_tto.png",
+      "cuarentena": "_assets_sin_usar\\images\\u_tto.png"
+    }
+  ]
+}
