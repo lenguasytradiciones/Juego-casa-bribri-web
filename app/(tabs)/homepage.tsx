@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavigationProp } from '@react-navigation/native';
 import { Image } from "expo-image";
 import {
   Platform,
   StyleSheet,
   TouchableOpacity,
+  useWindowDimensions,
   View
 } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
@@ -16,6 +17,18 @@ import CreditsModal from '../screens/CreditsModal';
 const HomePage = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [showAboutTheResourceModal, setShowAboutTheResourceModal] = useState(false);
   const [showCreditsModal, setShowCreditsModal] = useState(false);
+
+  // State to track if the component has mounted
+  const [mounted, setMounted] = useState(false);
+
+  // Set mounted to true after the first render
+  useEffect(() => setMounted(true), []);
+
+  // Null guard for width and height to avoid rendering issues on web
+  const { width, height } = useWindowDimensions();
+
+  // Return null on the first client render to match server render, preventing hydration issues
+  if (!mounted || !width || !height) return null;
 
   // Navigates to level mapping when play button is pressed
   const handlePress = () => {
