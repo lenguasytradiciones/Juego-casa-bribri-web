@@ -16,7 +16,6 @@
 
 ![homepage](./docs/assets/gameplay/homepage.png)
 
-> Para más información sobre la aplicación, léase [Sobre este Proyecto](./docs/project-context.md)
 
 ## Instalación y Configuración
 
@@ -55,6 +54,15 @@ npm start
 - **Coordinador del Proyecto:** Luis Serrato Pineda dipalicori@ucr.ac.cr
 
 ---
+
+## Documentación
+
+| Documento | Contenido |
+| --------- | ----------- |
+| [Sobre este Proyecto](./docs/project-context.md) | Información sobre el proyecto TCU-625 y el recurso que inspiró esta aplicación. |
+| [Stack Tecnológico](./docs/tech-stack.md) | Herramientas y librerías tecnológicas utilizadas. |
+| [Guía del Desarrollador](./docs/dev-guide.md) | Estructura del proyecto, archivos clave e información para desarrollo y contribución al proyecto. |
+| [Guía de Instalación y Despliegue](./docs/deploy-guide.md) | Instrucciones a seguir para instalar, probar y desplegar la aplicación. |
 
 
 ## Notas Adicionales
