@@ -14,7 +14,7 @@ const ResetModeModal: React.FC<ResetModeModalProps> = ({
   mode
 }) => {
   // Handler for resetting progress for mode
-  const handleConfirm = async () => {
+  const resetProgress = async () => {
     await resetModeProgress(mode);
     onClose();
   };
@@ -25,10 +25,9 @@ const ResetModeModal: React.FC<ResetModeModalProps> = ({
     <ResetProgressModal
       visible={visible}
       title={`¡Ha completado todos los niveles de ${modeName}!`}
-      description={`Puede reiniciar el progreso o completar el otro modo primero`}
+      description={`¡Reinicie su progreso para practicar otra vez!`}
       imageSource={require('@/assets/images/casa_sin_elementos.png')}
-      onConfirm={handleConfirm}
-      onContinue={onClose}
+      onConfirm={resetProgress}
     />
   );
 };
