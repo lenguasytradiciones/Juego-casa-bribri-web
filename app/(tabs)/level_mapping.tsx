@@ -17,14 +17,12 @@ import { LevelMode, LevelProgress, getLevelProgress } from '../misc/progress';
 import ModeProgress from '../screens/ModeProgress';
 import LevelStatusFlag from '../screens/LevelStatusFlag';
 import HoverTooltip from '@/components/HoverTooltip';
-import RestartModal from '../screens/RestartModal';
 import ResetModeModal from '../screens/ResetModeModal';
 
 const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [mode, setMode] = useState<string | null>(null);  // Selected mode
   const [isModeSelected, setIsModeSelected] = useState<boolean>(false);  // Flag of whether mode was selected
   const [progress, setProgress] = useState<LevelProgress | null>(null);
-  const [showRestartModal, setShowRestartModal] = useState<boolean>(false);
   const [showResetReadingModeModal, setShowResetReadingModeModal] = useState<boolean>(false);
   const [showResetListeningModeModal, setShowResetListeningModeModal] = useState<boolean>(false);
  
@@ -51,10 +49,7 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
       const readLevelsComplete = updatedProgress.readLevels.length === LEVELS.length;
       const listenLevelsComplete = updatedProgress.listenLevels.length === LEVELS.length;
 
-      // If all levels are completed in both modes, show restart modal
-      if (readLevelsComplete && listenLevelsComplete) {
-        setShowRestartModal(true);
-      } else if (readLevelsComplete) {
+      if (readLevelsComplete) {
         // If all reading levels are completed, show reset reading mode modal
         setShowResetReadingModeModal(true);
       } else if (listenLevelsComplete) {
@@ -185,7 +180,6 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
   // Function to handle restart after all levels are completed
   const handleRestart = async () => {
     await checkProgress();
-    setShowRestartModal(false);
     setShowResetListeningModeModal(false);
     setShowResetReadingModeModal(false);
   };
@@ -203,7 +197,6 @@ const LevelMapping = ({ navigation }: { navigation: NavigationProp<any> }) => {
           {/* Custom Back Button */}
           <BackButton onPress={handleBackPress} />
 
-          <RestartModal visible={showRestartModal} onClose={handleRestart} />
           <ResetModeModal mode={LevelMode.READ} visible={showResetReadingModeModal} onClose={handleRestart}/>
           <ResetModeModal mode={LevelMode.LISTEN} visible={showResetListeningModeModal} onClose={handleRestart}/>
 
